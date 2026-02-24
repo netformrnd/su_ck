@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>상비물품 체크리스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F1EB;--card:#FFF;--primary:#2D5A3D;--primary-light:#3A7650;--primary-pale:#E8F0EB;--accent:#D4763A;--accent-light:#F5E6D8;--danger:#C0392B;--danger-light:#FDECEA;--text:#2C2C2C;--text-sub:#7A7A7A;--border:#E2DDD5;--shadow:0 2px 12px rgba(0,0,0,.06);--shadow-lg:0 8px 32px rgba(0,0,0,.08);--radius:14px;--complete:#27AE60;--incomplete:#E67E22;--sub-bg:#FAFAF7;--sub-border:#EDE9E2;--admin:#F4F1EB;--admin-card:#FFFFFF;--admin-border:#E2DDD5;--admin-accent:#2D5A3D}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:100px}
+
+/* ═══ HEADER ═══ */
+.header{background:var(--primary);color:#fff;padding:36px 24px 56px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.header::after{content:'';position:absolute;bottom:-40px;left:30%;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04)}
+.header-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between}
+.header-left{}
+.header-icon{font-size:32px;margin-bottom:10px}
+.header h1{font-family:'Outfit','Noto Sans KR',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.header p{font-size:13px;opacity:.7;font-weight:300}
+.admin-trigger{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2);color:#fff;padding:8px 16px;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;backdrop-filter:blur(4px)}
+.admin-trigger:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.35)}
+
+/* ═══ TABS ═══ */
+.space-tabs-wrap{max-width:920px;margin:-28px auto 0;padding:0 16px;position:relative;z-index:10}
+.space-tabs{display:flex;gap:6px;align-items:end;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.space-tabs::-webkit-scrollbar{display:none}
+.space-tab{padding:12px 22px 10px;border-radius:14px 14px 0 0;background:rgba(255,255,255,.65);backdrop-filter:blur(6px);border:none;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:600;color:var(--text-sub);cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.space-tab:hover{background:rgba(255,255,255,.85);color:var(--text)}
+.space-tab.active{background:var(--bg);color:var(--primary);font-weight:700;box-shadow:0 -2px 8px rgba(0,0,0,.04)}
+.tab-badge{font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;background:var(--accent);color:#fff;padding:1px 7px;border-radius:100px;min-width:20px;text-align:center}
+.tab-badge.zero{background:var(--border);color:var(--text-sub)}
+.tab-edit-btn{width:20px;height:20px;border:none;background:0 0;cursor:pointer;font-size:11px;color:var(--text-sub);border-radius:4px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
+.space-tab:hover .tab-edit-btn,.space-tab.active .tab-edit-btn{opacity:1}
+.tab-edit-btn:hover{background:rgba(0,0,0,.06)}
+.add-space-tab{padding:10px 16px;border-radius:14px 14px 0 0;background:0 0;border:2px dashed var(--border);font-size:18px;color:var(--text-sub);cursor:pointer;transition:all .2s;flex-shrink:0;font-family:'Noto Sans KR',sans-serif}
+.add-space-tab:hover{border-color:var(--primary);color:var(--primary);background:rgba(255,255,255,.5)}
+
+.stats-bar{max-width:920px;margin:16px auto;padding:0 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat-card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);text-align:center}
+.stat-num{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;line-height:1}
+.stat-num.green{color:var(--complete)}.stat-num.orange{color:var(--incomplete)}.stat-num.red{color:var(--danger)}
+.stat-label{font-size:11px;color:var(--text-sub);margin-top:3px;font-weight:500}
+
+.controls{max-width:920px;margin:0 auto 14px;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{border:1.5px solid var(--border);background:var(--card);padding:7px 15px;border-radius:100px;font-size:13px;font-family:'Noto Sans KR',sans-serif;font-weight:500;color:var(--text-sub);cursor:pointer;transition:all .2s}
+.filter-btn:hover{border-color:var(--primary);color:var(--primary)}
+.filter-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-action{margin-left:auto;border:none;background:var(--accent);color:#fff;padding:7px 16px;border-radius:100px;font-size:13px;font-family:'Noto Sans KR',sans-serif;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+.btn-action:hover{background:#C06830;transform:translateY(-1px)}
+
+.container{max-width:920px;margin:0 auto;padding:0 16px}
+.category{margin-bottom:18px;animation:fadeUp .35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.cat-header{display:flex;align-items:center;gap:6px;padding:8px 4px;user-select:none}
+.cat-icon-btn{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;border:none;cursor:pointer;transition:transform .15s}
+.cat-icon-btn:hover{transform:scale(1.12)}
+.cat-title-edit{font-weight:700;font-size:15px;flex:1;border:none;background:0 0;font-family:'Noto Sans KR',sans-serif;color:var(--text);outline:none;padding:4px 8px;border-radius:8px;transition:background .2s;min-width:0}
+.cat-title-edit:hover{background:rgba(0,0,0,.04)}.cat-title-edit:focus{background:#fff;box-shadow:0 0 0 2px var(--primary-pale)}
+.cat-count{font-size:11px;color:var(--text-sub);background:var(--bg);padding:3px 10px;border-radius:100px;font-weight:500;white-space:nowrap}
+.small-btn{width:24px;height:24px;border-radius:6px;border:none;background:0 0;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s;color:var(--text-sub);flex-shrink:0}
+.small-btn:hover{background:rgba(0,0,0,.06);color:var(--text)}
+.small-btn.del:hover{background:var(--danger-light);color:var(--danger)}
+.cat-toggle{font-size:16px;color:var(--text-sub);cursor:pointer;transition:transform .3s;padding:4px;border:none;background:none}
+.cat-toggle.collapsed{transform:rotate(-90deg)}
+.cat-body{overflow:hidden;transition:max-height .35s ease}
+
+.drag-handle{width:22px;height:22px;display:flex;align-items:center;justify-content:center;cursor:grab;color:#C5C0B8;font-size:14px;flex-shrink:0;border-radius:4px;transition:all .15s;user-select:none;touch-action:none}
+.drag-handle:hover{color:var(--primary);background:var(--primary-pale)}
+.drag-handle:active{cursor:grabbing}
+.drag-handle svg{width:14px;height:14px;pointer-events:none}
+.dragging{opacity:.4;transform:scale(.97)}
+.drag-over-top{box-shadow:0 -3px 0 0 var(--primary)!important}
+.drag-over-bottom{box-shadow:0 3px 0 0 var(--primary)!important}
+
+.item-card{background:var(--card);border-radius:var(--radius);margin-bottom:7px;box-shadow:var(--shadow);transition:all .2s;border:1.5px solid transparent;overflow:hidden}
+.item-card:hover{border-color:var(--primary-pale)}
+.item-card.needs-purchase{border-left:3px solid var(--accent)}
+.item-card.completed .item-main{opacity:.5}
+.item-main{display:grid;grid-template-columns:auto auto 1fr auto auto auto auto;align-items:center;gap:8px;padding:11px 12px}
+
+.need-check{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.need-check:hover{border-color:var(--accent)}
+.need-check.checked{background:var(--accent);border-color:var(--accent)}
+.need-check.checked::after{content:'✓';color:#fff;font-size:13px;font-weight:700}
+.item-info{min-width:0;display:flex;flex-direction:column;gap:1px}
+.item-name-edit{font-weight:600;font-size:13.5px;border:none;background:0 0;font-family:'Noto Sans KR',sans-serif;color:var(--text);outline:none;padding:2px 6px;border-radius:6px;width:100%;transition:background .2s}
+.item-name-edit:hover{background:rgba(0,0,0,.03)}.item-name-edit:focus{background:#fff;box-shadow:0 0 0 2px var(--primary-pale)}
+.item-note-edit{font-size:11px;color:var(--text-sub);border:none;background:0 0;font-family:'Noto Sans KR',sans-serif;outline:none;padding:1px 6px;border-radius:4px;width:100%;transition:background .2s}
+.item-note-edit::placeholder{color:#C5C0B8}.item-note-edit:hover{background:rgba(0,0,0,.02)}.item-note-edit:focus{background:#fff;box-shadow:0 0 0 1.5px var(--primary-pale)}
+.expand-toggle{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s;color:var(--text-sub);flex-shrink:0;position:relative}
+.expand-toggle:hover{border-color:var(--primary);color:var(--primary)}
+.expand-toggle .badge{position:absolute;top:-5px;right:-5px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif}
+.expand-toggle.open{background:var(--primary-pale);border-color:var(--primary);color:var(--primary)}
+.qty-control{display:flex;align-items:center;gap:2px;opacity:0;pointer-events:none;transition:all .2s}
+.item-card.needs-purchase .qty-control{opacity:1;pointer-events:auto}
+.qty-btn{width:25px;height:25px;border-radius:7px;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:14px;font-weight:700;color:var(--text-sub);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.qty-btn:hover{border-color:var(--primary);color:var(--primary)}
+.qty-value{font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;width:28px;text-align:center}
+.status-toggle{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:'Noto Sans KR',sans-serif;transition:all .2s;white-space:nowrap}
+.status-toggle.incomplete{background:var(--accent-light);color:var(--accent)}
+.status-toggle.complete{background:#E8F5E9;color:var(--complete)}
+.item-delete{width:24px;height:24px;border-radius:6px;border:none;background:0 0;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s;color:#CCC;flex-shrink:0}
+.item-delete:hover{background:var(--danger-light);color:var(--danger)}
+
+.sub-panel{background:var(--sub-bg);border-top:1px solid var(--sub-border);padding:0;max-height:0;overflow:hidden;transition:max-height .3s ease}
+.sub-panel.open{padding:10px 14px 10px 46px;max-height:2000px}
+.sub-item{display:grid;grid-template-columns:auto auto 1fr auto auto auto;align-items:center;gap:6px;padding:7px 10px;background:var(--card);border-radius:10px;margin-bottom:5px;border:1px solid var(--sub-border);transition:all .15s}
+.sub-item:hover{border-color:var(--primary-pale)}
+.sub-item.sub-needs{border-left:3px solid var(--accent)}
+.sub-item.sub-done{opacity:.5}
+.sub-check{width:18px;height:18px;border:2px solid var(--border);border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.sub-check:hover{border-color:var(--accent)}
+.sub-check.checked{background:var(--accent);border-color:var(--accent)}
+.sub-check.checked::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
+.sub-name-edit{font-weight:500;font-size:13px;border:none;background:0 0;font-family:'Noto Sans KR',sans-serif;color:var(--text);outline:none;padding:2px 6px;border-radius:5px;width:100%;transition:background .2s}
+.sub-name-edit:hover{background:rgba(0,0,0,.03)}.sub-name-edit:focus{background:#fff;box-shadow:0 0 0 2px var(--primary-pale)}
+.sub-qty{display:flex;align-items:center;gap:1px;opacity:0;pointer-events:none;transition:all .2s}
+.sub-item.sub-needs .sub-qty{opacity:1;pointer-events:auto}
+.sub-qty-btn{width:22px;height:22px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:12px;font-weight:700;color:var(--text-sub);display:flex;align-items:center;justify-content:center}
+.sub-qty-btn:hover{border-color:var(--primary);color:var(--primary)}
+.sub-qty-val{font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;width:24px;text-align:center}
+.sub-status{padding:3px 9px;border-radius:100px;font-size:10px;font-weight:600;cursor:pointer;border:none;font-family:'Noto Sans KR',sans-serif;white-space:nowrap}
+.sub-status.incomplete{background:var(--accent-light);color:var(--accent)}
+.sub-status.complete{background:#E8F5E9;color:var(--complete)}
+.sub-del{width:22px;height:22px;border-radius:5px;border:none;background:0 0;cursor:pointer;font-size:11px;color:#CCC;display:flex;align-items:center;justify-content:center}
+.sub-del:hover{background:var(--danger-light);color:var(--danger)}
+.sub-add-row{display:flex;gap:6px;margin-top:4px}
+.sub-add-input{flex:1;border:1.5px dashed var(--sub-border);border-radius:8px;padding:7px 12px;font-size:12px;font-family:'Noto Sans KR',sans-serif;background:0 0;color:var(--text);outline:none}
+.sub-add-input::placeholder{color:#C5C0B8}.sub-add-input:focus{border-color:var(--primary)}
+.sub-add-btn{width:32px;height:32px;border-radius:8px;border:none;background:var(--primary);color:#fff;font-size:16px;cursor:pointer;flex-shrink:0}
+.sub-add-btn:hover{background:var(--primary-light);transform:scale(1.05)}
+.add-item-row{display:flex;gap:8px;padding:6px 0}
+.add-input{flex:1;border:1.5px dashed var(--border);border-radius:10px;padding:9px 14px;font-size:13px;font-family:'Noto Sans KR',sans-serif;background:0 0;color:var(--text);outline:none}
+.add-input::placeholder{color:#BFBAB2}.add-input:focus{border-color:var(--primary)}
+.add-btn{width:38px;height:38px;border-radius:10px;border:none;background:var(--primary);color:#fff;font-size:20px;cursor:pointer;flex-shrink:0}
+.add-btn:hover{background:var(--primary-light);transform:scale(1.05)}
+.add-category-row{max-width:920px;margin:8px auto 0;padding:0 16px}
+.add-cat-btn{width:100%;border:2px dashed var(--border);border-radius:var(--radius);padding:12px;font-size:13px;font-family:'Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);background:0 0;cursor:pointer;transition:all .2s}
+.add-cat-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-pale)}
+.footer-actions{max-width:920px;margin:20px auto 0;padding:0 16px;display:flex;gap:10px;flex-wrap:wrap}
+.footer-btn{border:1.5px solid var(--border);background:var(--card);padding:9px 18px;border-radius:var(--radius);font-size:13px;font-family:'Noto Sans KR',sans-serif;font-weight:600;color:var(--text);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.footer-btn:hover{border-color:var(--primary);color:var(--primary)}
+.footer-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;justify-content:center;align-items:center;backdrop-filter:blur(2px)}
+.modal-overlay.show{display:flex}
+.modal-box{background:#fff;border-radius:20px;padding:24px;width:360px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,.15);animation:modalIn .25s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-title{font-weight:700;font-size:15px;margin-bottom:14px;text-align:center}
+.modal-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;margin-bottom:14px}
+.modal-input:focus{border-color:var(--primary)}
+.emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:14px}
+.emoji-opt{width:100%;aspect-ratio:1;border:2px solid var(--border);border-radius:10px;background:#fff;font-size:20px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+.emoji-opt:hover{border-color:var(--primary);transform:scale(1.1);background:var(--primary-pale)}
+.emoji-opt.selected{border-color:var(--primary);background:var(--primary-pale);box-shadow:0 0 0 2px var(--primary)}
+.color-row{display:flex;gap:8px;margin-bottom:14px;justify-content:center;flex-wrap:wrap}
+.color-opt{width:30px;height:30px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:all .15s}
+.color-opt:hover{transform:scale(1.15)}
+.color-opt.selected{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary-pale)}
+.modal-actions{display:flex;gap:8px}
+.modal-btn{flex:1;padding:10px;border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s}
+.modal-btn.primary{background:var(--primary);color:#fff}.modal-btn.primary:hover{background:var(--primary-light)}
+.modal-btn.danger{background:var(--danger-light);color:var(--danger)}.modal-btn.danger:hover{background:#F5C6C0}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:#fff;padding:11px 22px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .3s ease;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ═══════════════════════════════════════════
+   ADMIN MODE 
+   ═══════════════════════════════════════════ */
+.admin-overlay{display:none;position:fixed;inset:0;z-index:200;background:var(--admin);overflow-y:auto}
+.admin-overlay.show{display:block}
+
+.admin-header{padding:24px 24px 20px;border-bottom:1px solid var(--admin-border);display:flex;align-items:center;justify-content:space-between;max-width:960px;margin:0 auto}
+.admin-header h2{color:var(--text);font-family:'Outfit','Noto Sans KR',sans-serif;font-size:22px;font-weight:800;display:flex;align-items:center;gap:10px}
+.admin-header h2 span{font-size:24px}
+.admin-close{background:rgba(0,0,0,.05);border:1px solid var(--admin-border);color:var(--text);padding:8px 18px;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.admin-close:hover{background:rgba(0,0,0,.1)}
+
+.admin-body{max-width:960px;margin:0 auto;padding:20px 24px 80px}
+
+/* Admin controls */
+.admin-controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.admin-select{background:var(--admin-card);border:1px solid var(--admin-border);color:var(--text);padding:9px 14px;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:13px;outline:none;cursor:pointer;font-weight:500}
+.admin-select option{background:var(--admin-card);color:var(--text)}
+.admin-btn{background:var(--admin-accent);border:none;color:#fff;padding:9px 18px;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+.admin-btn:hover{opacity:.85;transform:translateY(-1px)}
+.admin-btn.outline{background:transparent;border:1.5px solid var(--admin-border);color:var(--text-sub)}
+.admin-btn.outline:hover{border-color:var(--primary);color:var(--primary)}
+.admin-btn.danger-btn{background:#E74C3C}
+
+/* Summary cards */
+.admin-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.a-card{background:var(--admin-card);border-radius:14px;padding:18px;border:1px solid var(--admin-border);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.a-card-label{font-size:11px;color:var(--text-sub);font-weight:500;margin-bottom:6px}
+.a-card-value{font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:var(--text)}
+.a-card-value.purple{color:var(--admin-accent)}
+.a-card-value.green{color:#27AE60}
+.a-card-value.orange{color:#E67E22}
+.a-card-value.blue{color:#2980B9}
+.a-card-sub{font-size:11px;color:var(--text-sub);margin-top:4px}
+
+/* Chart */
+.chart-section{background:var(--admin-card);border-radius:14px;padding:20px;border:1px solid var(--admin-border);margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.chart-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.chart-bar-wrap{display:flex;flex-direction:column;gap:8px}
+.chart-row{display:flex;align-items:center;gap:10px}
+.chart-label{width:100px;font-size:12px;color:var(--text-sub);text-align:right;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chart-bar-bg{flex:1;height:26px;background:rgba(0,0,0,.04);border-radius:8px;overflow:hidden;position:relative}
+.chart-bar{height:100%;border-radius:8px;transition:width .6s ease;display:flex;align-items:center;padding-left:10px;font-size:11px;font-weight:700;color:#fff;min-width:fit-content}
+.chart-bar.purple{background:linear-gradient(90deg,var(--admin-accent),#3A7650)}
+.chart-bar.green{background:linear-gradient(90deg,#27AE60,#2ECC71)}
+.chart-bar.orange{background:linear-gradient(90deg,#E67E22,#F39C12)}
+.chart-bar.blue{background:linear-gradient(90deg,#2980B9,#3498DB)}
+.chart-val{font-size:12px;color:var(--text-sub);width:50px;text-align:right;flex-shrink:0;font-family:'Outfit',sans-serif;font-weight:700}
+
+/* History table */
+.history-section{background:var(--admin-card);border-radius:14px;padding:20px;border:1px solid var(--admin-border);margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.history-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.history-table{width:100%;border-collapse:collapse}
+.history-table th{text-align:left;font-size:11px;color:var(--text-sub);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--admin-border);white-space:nowrap}
+.history-table td{font-size:13px;color:var(--text);padding:10px;border-bottom:1px solid rgba(0,0,0,.04)}
+.history-table tr:hover td{background:rgba(0,0,0,.02)}
+.h-space-tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;background:var(--primary-pale);color:var(--admin-accent)}
+.h-cat-tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;background:rgba(0,0,0,.05);color:var(--text-sub)}
+.h-qty{font-family:'Outfit',sans-serif;font-weight:700;color:var(--text)}
+.h-date{color:var(--text-sub);font-size:12px}
+.h-empty{text-align:center;padding:40px 20px;color:var(--text-sub);font-size:14px}
+
+/* Password modal */
+.pw-modal{background:#fff;border-radius:20px;padding:32px;width:340px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,.15);animation:modalIn .25s ease;text-align:center}
+.pw-modal .modal-title{color:var(--text);font-size:18px;margin-bottom:8px}
+.pw-modal .pw-sub{color:var(--text-sub);font-size:12px;margin-bottom:20px}
+.pw-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;background:#fff;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:15px;outline:none;text-align:center;letter-spacing:4px;margin-bottom:6px}
+.pw-input:focus{border-color:var(--primary)}
+.pw-input::placeholder{letter-spacing:0;color:#C5C0B8}
+.pw-error{color:#E74C3C;font-size:12px;height:20px;margin-bottom:10px}
+.pw-btn{width:100%;padding:12px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s}
+.pw-btn:hover{background:var(--primary-light)}
+
+@media print{body{background:#fff}.controls,.add-item-row,.footer-actions,.btn-action,.qty-btn,.filter-btn,.item-delete,.small-btn,.add-category-row,.add-cat-btn,.add-space-tab,.tab-edit-btn,.sub-add-row,.sub-del,.expand-toggle,.drag-handle,.admin-trigger{display:none!important}.item-card,.sub-item{box-shadow:none;border:1px solid #ddd}.header{background:#fff!important;color:#000!important;padding:20px}.stat-card{box-shadow:none;border:1px solid #ddd}.sub-panel.open{padding-left:40px}}
+@media(max-width:600px){.header h1{font-size:21px}.header-inner{flex-direction:column;align-items:flex-start;gap:12px}.stat-num{font-size:22px}.item-main{grid-template-columns:auto auto 1fr auto auto;gap:6px;padding:10px 10px}.qty-control{display:none!important}.sub-qty{display:none!important}.sub-panel.open{padding-left:24px}.space-tab{padding:10px 14px 8px;font-size:13px}.admin-summary{grid-template-columns:repeat(2,1fr)}.chart-label{width:70px;font-size:11px}}
+</style>
+</head>
+<body>
+
+<!-- ═══ MAIN VIEW ═══ -->
+<div id="mainView">
+<div class="header"><div class="header-inner">
+  <div class="header-left">
+    <div class="header-icon">📋</div>
+    <h1>상비물품 체크리스트</h1>
+    <p id="dateDisplay"></p>
+  </div>
+  <button class="admin-trigger" onclick="showPwModal()">🔐 관리자</button>
+</div></div>
+
+<div class="space-tabs-wrap"><div class="space-tabs" id="spaceTabs"></div></div>
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num green" id="sT">0</div><div class="stat-label">전체 물품</div></div>
+  <div class="stat-card"><div class="stat-num orange" id="sN">0</div><div class="stat-label">구매 필요</div></div>
+  <div class="stat-card"><div class="stat-num red" id="sP">0</div><div class="stat-label">구매 미완료</div></div>
+</div>
+<div class="controls">
+  <button class="filter-btn active" data-filter="all">전체</button>
+  <button class="filter-btn" data-filter="need">🛒 구매 필요</button>
+  <button class="filter-btn" data-filter="pending">⏳ 미완료</button>
+  <button class="filter-btn" data-filter="done">✅ 완료</button>
+  <button class="btn-action" onclick="exportList()">📋 목록 복사</button>
+</div>
+<div class="container" id="mc"></div>
+<div class="add-category-row"><button class="add-cat-btn" onclick="addCat()">+ 새 카테고리 추가</button></div>
+<div class="footer-actions">
+  <button class="footer-btn" onclick="window.print()">🖨️ 인쇄</button>
+  <button class="footer-btn" onclick="manualSave()">💾 저장</button>
+  <button class="footer-btn" onclick="loadData()">📂 불러오기</button>
+  <button class="footer-btn danger" onclick="resetAll()">🔄 초기화</button>
+</div>
+</div>
+
+<!-- ═══ PASSWORD MODAL ═══ -->
+<div class="modal-overlay" id="pwOverlay">
+  <div class="pw-modal">
+    <div class="modal-title">🔐 관리자 모드</div>
+    <div class="pw-sub">비밀번호를 입력하세요</div>
+    <input class="pw-input" id="pwInput" type="password" placeholder="비밀번호" onkeydown="if(event.key==='Enter')checkPw()"/>
+    <div class="pw-error" id="pwError"></div>
+    <button class="pw-btn" onclick="checkPw()">확인</button>
+  </div>
+</div>
+
+<!-- ═══ ADMIN MODE ═══ -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-header">
+    <h2><span>📊</span> 구매 내역 관리</h2>
+    <button class="admin-close" onclick="closeAdmin()">✕ 닫기</button>
+  </div>
+  <div class="admin-body" id="adminBody"></div>
+</div>
+
+<!-- ═══ GENERAL MODAL ═══ -->
+<div class="modal-overlay" id="modal"><div class="modal-box" id="mBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const GRIP_SVG='<svg viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg>';
+const ADMIN_PW='ice080303';
+const DS=[{id:'pantry',name:'탕비실',icon:'☕'},{id:'office',name:'사무실',icon:'🏢'}];
+const SI_ICONS=['☕','🏢','🏠','📦','🔧','🚗','💊','🎨','📚','🏪','🧪','🌿'];
+const CI_ICONS=['☕','🍪','🍽️','🧹','⚡','🏥','🧊','🍜','🥤','📦','🧴','💡','🔧','🎒','🧻','🪣','🍵','✏️','📄','📁','💻','🧼','🖨️','🗂️'];
+const COLORS=['#E8D5B7','#F5D5C8','#D5E8D4','#D4E4F7','#E8E0F0','#FCE4E4','#FFF3CD','#D4EDDA','#CCE5FF','#F8D7DA','#E2E3E5','#D6D8DB'];
+const DC={pantry:[{id:'drinks',icon:'☕',title:'음료류',color:'#E8D5B7',items:[{name:'커피',note:'종류별 구비',subs:['원두커피','믹스커피','캡슐커피','스타벅스 스틱']},{name:'티백',note:'다양한 종류',subs:['녹차','홍차','허브티','캐모마일']},{name:'코코아/율무차',note:'겨울철',subs:[]},{name:'생수',note:'필수',subs:['500ml','2L']},{name:'음료',note:'회의용',subs:['주스','탄산음료','이온음료']},{name:'우유/두유',note:'유통기한 주의',subs:['흰우유','두유','귀리음료']}]},{id:'snacks',icon:'🍪',title:'다과/간식류',color:'#F5D5C8',items:[{name:'과자/비스킷',note:'개별포장',subs:['크래커','쿠키','웨하스']},{name:'견과류',note:'건강간식',subs:['믹스넛','아몬드','캐슈넛']},{name:'사탕/초콜릿',note:'접대용',subs:['사탕','초콜릿','젤리']},{name:'에너지바',note:'야근 대비',subs:[]},{name:'컵라면/즉석식품',note:'비상식량',subs:['컵라면','즉석밥','즉석국']},{name:'설탕/시럽/프림',note:'커피 부자재',subs:['설탕','시럽','프림']}]},{id:'kitchen',icon:'🍽️',title:'주방/식기류',color:'#D5E8D4',items:[{name:'종이컵',note:'소모량 체크',subs:['일반','큰것']},{name:'일회용 수저',note:'',subs:['나무젓가락','숟가락','포크']},{name:'머그컵/텀블러',note:'',subs:[]},{name:'냅킨/키친타월',note:'',subs:['냅킨','키친타월']},{name:'지퍼백/비닐봉투',note:'',subs:['지퍼백(소)','지퍼백(대)','비닐봉투']}]},{id:'cleaning',icon:'🧹',title:'위생/청소용품',color:'#D4E4F7',items:[{name:'주방세제/수세미',note:'',subs:['주방세제','수세미','철수세미']},{name:'행주/걸레',note:'',subs:[]},{name:'쓰레기봉투',note:'',subs:['일반(소)','일반(대)','재활용']},{name:'핸드워시',note:'',subs:[]},{name:'핸드타올',note:'',subs:[]}]},{id:'p_supply',icon:'⚡',title:'비품/소모품',color:'#E8E0F0',items:[{name:'정수기 필터',note:'3~6개월',subs:[]},{name:'커피머신 관리',note:'',subs:['세정제','필터','물때제거제']},{name:'건전지',note:'',subs:['AA','AAA']}]},{id:'emergency',icon:'🏥',title:'비상/구급용품',color:'#FCE4E4',items:[{name:'구급상자',note:'분기별 점검',subs:['밴드','소독약','거즈','핀셋']},{name:'상비약',note:'유통기한',subs:['두통약','소화제','지사제','해열제']},{name:'마스크',note:'',subs:['KF94','덴탈마스크']},{name:'손소독제',note:'',subs:[]}]}],
+office:[{id:'stationery',icon:'✏️',title:'문구류',color:'#FFF3CD',items:[{name:'필기구',note:'',subs:['볼펜','사인펜','형광펜','네임펜']},{name:'연필/샤프',note:'',subs:['연필','샤프','지우개','샤프심']},{name:'메모지/포스트잇',note:'',subs:['포스트잇(소)','포스트잇(대)','메모지']},{name:'스테이플러/심',note:'',subs:['스테이플러','심','제침기']},{name:'가위/풀/테이프',note:'',subs:['가위','딱풀','테이프']},{name:'클립류',note:'',subs:['종이클립','바인더클립(소)','바인더클립(대)']}]},{id:'paper',icon:'📄',title:'용지/인쇄',color:'#CCE5FF',items:[{name:'복사용지',note:'',subs:['A4','A3']},{name:'프린터 소모품',note:'기종확인',subs:['토너(검정)','토너(컬러)','잉크카트리지']},{name:'봉투',note:'',subs:['서류봉투','우편봉투','대봉투']}]},{id:'organize',icon:'📁',title:'정리/수납',color:'#D4EDDA',items:[{name:'화일/클리어파일',note:'',subs:['클리어파일','L자홀더']},{name:'바인더',note:'',subs:['링바인더','레버화일','인덱스탭']}]},{id:'tech',icon:'💻',title:'IT/전자기기',color:'#E8E0F0',items:[{name:'충전케이블',note:'공용 비치',subs:['C타입','8핀','5핀']},{name:'멀티탭',note:'안전인증',subs:['멀티탭(3구)','멀티탭(6구)','연장선']},{name:'건전지',note:'',subs:['AA','AAA']}]},{id:'o_clean',icon:'🧼',title:'사무실 위생',color:'#D4E4F7',items:[{name:'티슈/핸드타올',note:'',subs:['각티슈','미니티슈','핸드타올']},{name:'물티슈',note:'',subs:[]},{name:'쓰레기봉투',note:'',subs:['일반(소)','재활용']},{name:'손소독제',note:'',subs:[]},{name:'청소용품',note:'',subs:['먼지떨이','물걸레']}]}]};
+
+let spaces=[],cats={},items=[],asp='',cf='all',openSubs={};
+let history=[]; // {id,date,space,spaceName,cat,catName,item,sub,qty}
+
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function init(){
+  const s=localStorage.getItem('cl_v6');
+  if(s){const d=JSON.parse(s);spaces=d.spaces;cats=d.cats;items=d.items;asp=d.asp||spaces[0]?.id||'';history=d.history||[]}
+  else buildDef();
+  updDate();rTabs();render();
+}
+function buildDef(){
+  spaces=DS.map(s=>({...s}));cats={};items=[];history=[];
+  spaces.forEach(sp=>{
+    const dc=DC[sp.id]||[];
+    cats[sp.id]=dc.map(c=>({id:c.id,icon:c.icon,title:c.title,color:c.color}));
+    dc.forEach(cat=>cat.items.forEach(it=>{
+      items.push({id:uid(),space:sp.id,cat:cat.id,name:it.name,note:it.note,need:false,qty:1,done:false,
+        subs:(it.subs||[]).map(n=>({id:uid(),name:n,need:false,qty:1,done:false}))});
+    }));
+  });
+  asp=spaces[0]?.id||'';
+}
+function updDate(){document.getElementById('dateDisplay').textContent=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'})+' 기준'}
+
+// ═══════ PURCHASE HISTORY LOGGING ═══════
+function logPurchase(spaceName,catName,itemName,subName,qty){
+  history.push({id:uid(),date:new Date().toISOString(),spaceName,catName,item:itemName,sub:subName||'',qty});
+  save();
+}
+
+// ═══════ TABS / RENDER / ITEMS / SUBS / CATS / SPACES ═══════
+function rTabs(){
+  document.getElementById('spaceTabs').innerHTML=spaces.map(sp=>{
+    const n=items.filter(i=>i.space===sp.id).reduce((a,i)=>{let c=i.need&&!i.done?1:0;c+=i.subs.filter(s=>s.need&&!s.done).length;return a+c},0);
+    return `<button class="space-tab ${sp.id===asp?'active':''}" onclick="swSp('${sp.id}')"><span>${sp.icon}</span>${esc(sp.name)}<span class="tab-badge ${n===0?'zero':''}">${n}</span><span class="tab-edit-btn" onclick="event.stopPropagation();openSpEd('${sp.id}')">⚙</span></button>`;
+  }).join('')+`<button class="add-space-tab" onclick="addSp()">＋</button>`;
+}
+function swSp(id){asp=id;cf='all';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));rTabs();render()}
+
+function render(){
+  const c=document.getElementById('mc');c.innerHTML='';
+  const si=items.filter(i=>i.space===asp),sc=cats[asp]||[],aS=si.reduce((a,i)=>a.concat(i.subs),[]);
+  document.getElementById('sT').textContent=si.length+aS.length;
+  document.getElementById('sN').textContent=si.filter(d=>d.need).length+aS.filter(s=>s.need).length;
+  document.getElementById('sP').textContent=si.filter(d=>d.need&&!d.done).length+aS.filter(s=>s.need&&!s.done).length;
+  sc.forEach((cat,ci)=>{
+    const cI=si.filter(d=>d.cat===cat.id),fi=filt(cI);if(fi.length===0&&cf!=='all')return;
+    const nC=cI.filter(d=>d.need).length+cI.reduce((a,i)=>a+i.subs.filter(s=>s.need).length,0);
+    const sec=document.createElement('div');sec.className='category';sec.style.animationDelay=(ci*.03)+'s';
+    sec.innerHTML=`<div class="cat-header"><button class="cat-icon-btn" style="background:${cat.color}" onclick="openCatEd('${cat.id}')">${cat.icon}</button><input class="cat-title-edit" value="${esc(cat.title)}" onchange="updCT('${cat.id}',this.value)"/><div class="cat-count">${nC>0?'🛒 '+nC+'개':'✓'}</div><button class="small-btn" onclick="moveCat('${cat.id}',-1)">▲</button><button class="small-btn" onclick="moveCat('${cat.id}',1)">▼</button><button class="small-btn del" onclick="delCat('${cat.id}')">🗑</button><button class="cat-toggle" onclick="togCol(this)">▾</button></div><div class="cat-body" id="cb_${cat.id}">${fi.map(it=>rItem(it)).join('')}<div class="add-item-row"><input class="add-input" placeholder="+ 새 물품 추가..." onkeydown="if(event.key==='Enter')addIt('${cat.id}',this)"/><button class="add-btn" onclick="addIt('${cat.id}',this.previousElementSibling)">+</button></div></div>`;
+    c.appendChild(sec);setupDrag(document.getElementById('cb_'+cat.id),'.item-card','item');
+  });save();
+}
+function rItem(it){const nc=it.need?'needs-purchase':'',dc=it.done?'completed':'',sc=it.done?'complete':'incomplete',st=it.done?'완료':'미완료',sC=it.subs.length,isO=openSubs[it.id];return `<div class="item-card ${nc} ${dc}" data-id="${it.id}"><div class="item-main"><div class="drag-handle">${GRIP_SVG}</div><div class="need-check ${it.need?'checked':''}" onclick="togN('${it.id}')"></div><div class="item-info"><input class="item-name-edit" value="${esc(it.name)}" onchange="updI('${it.id}','name',this.value)" placeholder="물품명"/><input class="item-note-edit" value="${esc(it.note)}" onchange="updI('${it.id}','note',this.value)" placeholder="메모"/></div><button class="expand-toggle ${isO?'open':''}" onclick="togSubPanel('${it.id}')">${isO?'▾':'▸'}${sC>0?`<span class="badge">${sC}</span>`:''}</button><div class="qty-control"><button class="qty-btn" onclick="chgQ('${it.id}',-1)">−</button><span class="qty-value">${it.qty}</span><button class="qty-btn" onclick="chgQ('${it.id}',1)">+</button></div><button class="status-toggle ${sc}" onclick="togD('${it.id}')" ${!it.need?'style="visibility:hidden"':''}>${st}</button><button class="item-delete" onclick="delIt('${it.id}')">✕</button></div><div class="sub-panel ${isO?'open':''}" data-parent="${it.id}">${it.subs.map(s=>rSub(it.id,s)).join('')}<div class="sub-add-row"><input class="sub-add-input" placeholder="+ 세부 항목 추가..." onkeydown="if(event.key==='Enter')addSub('${it.id}',this)"/><button class="sub-add-btn" onclick="addSub('${it.id}',this.previousElementSibling)">+</button></div></div></div>`}
+function rSub(pid,s){const nc=s.need?'sub-needs':'',dc=s.done?'sub-done':'',sc=s.done?'complete':'incomplete',st=s.done?'완료':'미완료';return `<div class="sub-item ${nc} ${dc}" data-sid="${s.id}" data-pid="${pid}"><div class="drag-handle sub-handle">${GRIP_SVG}</div><div class="sub-check ${s.need?'checked':''}" onclick="togSN('${pid}','${s.id}')"></div><input class="sub-name-edit" value="${esc(s.name)}" onchange="updS('${pid}','${s.id}',this.value)"/><div class="sub-qty"><button class="sub-qty-btn" onclick="chgSQ('${pid}','${s.id}',-1)">−</button><span class="sub-qty-val">${s.qty}</span><button class="sub-qty-btn" onclick="chgSQ('${pid}','${s.id}',1)">+</button></div><button class="sub-status ${sc}" onclick="togSD('${pid}','${s.id}')" ${!s.need?'style="visibility:hidden"':''}>${st}</button><button class="sub-del" onclick="delS('${pid}','${s.id}')">✕</button></div>`}
+function filt(a){switch(cf){case 'need':return a.filter(i=>i.need||i.subs.some(s=>s.need));case 'pending':return a.filter(i=>(i.need&&!i.done)||i.subs.some(s=>s.need&&!s.done));case 'done':return a.filter(i=>(i.need&&i.done)||i.subs.some(s=>s.need&&s.done));default:return a}}
+
+// Drag
+function setupDrag(container,sel,type){if(!container)return;container.querySelectorAll(':scope > '+sel).forEach(el=>{const h=el.querySelector('.drag-handle');if(!h)return;h.addEventListener('mousedown',e=>startDr(e,el,container,sel,type));h.addEventListener('touchstart',e=>startDr(e,el,container,sel,type),{passive:false})});container.querySelectorAll('.sub-panel.open').forEach(p=>{p.querySelectorAll(':scope > .sub-item').forEach(el=>{const h=el.querySelector('.sub-handle');if(!h)return;h.addEventListener('mousedown',e=>startDr(e,el,p,'.sub-item','sub'));h.addEventListener('touchstart',e=>startDr(e,el,p,'.sub-item','sub'),{passive:false})})})}
+function startDr(e,el,con,sel,type){e.preventDefault();el.classList.add('dragging');const onM=e2=>{e2.preventDefault();const y=e2.touches?e2.touches[0].clientY:e2.clientY;[...con.querySelectorAll(':scope > '+sel)].forEach(s=>{s.classList.remove('drag-over-top','drag-over-bottom')});for(const sib of con.querySelectorAll(':scope > '+sel)){if(sib===el)continue;const r=sib.getBoundingClientRect(),mid=r.top+r.height/2;if(y<mid&&y>r.top-10){sib.classList.add('drag-over-top');break}else if(y>=mid&&y<r.bottom+10){sib.classList.add('drag-over-bottom');break}}};const onU=()=>{document.removeEventListener('mousemove',onM);document.removeEventListener('mouseup',onU);document.removeEventListener('touchmove',onM);document.removeEventListener('touchend',onU);el.classList.remove('dragging');let target=null,pos='';for(const sib of con.querySelectorAll(':scope > '+sel)){if(sib.classList.contains('drag-over-top')){target=sib;pos='before';break}if(sib.classList.contains('drag-over-bottom')){target=sib;pos='after';break}}[...con.querySelectorAll(':scope > '+sel)].forEach(s=>{s.classList.remove('drag-over-top','drag-over-bottom')});if(target&&target!==el)applyRe(el,target,pos,type)};document.addEventListener('mousemove',onM);document.addEventListener('mouseup',onU);document.addEventListener('touchmove',onM,{passive:false});document.addEventListener('touchend',onU)}
+function applyRe(el,tg,pos,type){if(type==='item'){const fi=items.find(i=>i.id===el.dataset.id),ti=items.find(i=>i.id===tg.dataset.id);if(!fi||!ti||fi.cat!==ti.cat)return;const gi=items.indexOf(fi);items.splice(gi,1);const gti=items.indexOf(ti);items.splice(pos==='before'?gti:gti+1,0,fi);toast('↕ 순서 변경');render()}else if(type==='sub'){const pid=el.dataset.pid,p=items.find(i=>i.id===pid);if(!p)return;const fi=p.subs.findIndex(s=>s.id===el.dataset.sid),ti2=p.subs.findIndex(s=>s.id===tg.dataset.sid);if(fi<0||ti2<0)return;const[m]=p.subs.splice(fi,1);const nt=p.subs.findIndex(s=>s.id===tg.dataset.sid);p.subs.splice(pos==='before'?nt:nt+1,0,m);toast('↕ 순서 변경');render()}}
+function moveCat(cid,dir){const arr=cats[asp]||[],idx=arr.findIndex(c=>c.id===cid),ni=idx+dir;if(ni<0||ni>=arr.length)return;[arr[idx],arr[ni]]=[arr[ni],arr[idx]];render()}
+
+// Item actions with history logging
+function togN(id){const it=items.find(x=>x.id===id);if(it){it.need=!it.need;if(!it.need){it.done=false;it.qty=1}}rTabs();render()}
+function togD(id){
+  const it=items.find(x=>x.id===id);if(!it||!it.need)return;
+  it.done=!it.done;
+  if(it.done){
+    const sp=spaces.find(s=>s.id===it.space);
+    const cat=(cats[it.space]||[]).find(c=>c.id===it.cat);
+    logPurchase(sp?.name||'',cat?.title||'',it.name,'',it.qty);
+  }
+  toast(it.done?'✅ 완료':'⏳ 미완료');rTabs();render();
+}
+function chgQ(id,d){const it=items.find(x=>x.id===id);if(it)it.qty=Math.max(1,it.qty+d);render()}
+function updI(id,f,v){const it=items.find(x=>x.id===id);if(it)it[f]=v;save()}
+function delIt(id){const it=items.find(x=>x.id===id);if(it&&confirm(`"${it.name}" 삭제?`)){items=items.filter(x=>x.id!==id);delete openSubs[id];toast('🗑 삭제');rTabs();render()}}
+function addIt(cid,inp){const n=inp.value.trim();if(!n)return;items.push({id:uid(),space:asp,cat:cid,name:n,note:'',need:false,qty:1,done:false,subs:[]});inp.value='';toast('✅ 추가');render()}
+
+function togSubPanel(id){openSubs[id]=!openSubs[id];render()}
+function togSN(pid,sid){const p=items.find(x=>x.id===pid);if(!p)return;const s=p.subs.find(x=>x.id===sid);if(s){s.need=!s.need;if(!s.need){s.done=false;s.qty=1}}rTabs();render()}
+function togSD(pid,sid){
+  const p=items.find(x=>x.id===pid);if(!p)return;const s=p.subs.find(x=>x.id===sid);
+  if(!s||!s.need)return;s.done=!s.done;
+  if(s.done){
+    const sp=spaces.find(x=>x.id===p.space);
+    const cat=(cats[p.space]||[]).find(c=>c.id===p.cat);
+    logPurchase(sp?.name||'',cat?.title||'',p.name,s.name,s.qty);
+  }
+  toast(s.done?'✅ 완료':'⏳ 미완료');rTabs();render();
+}
+function chgSQ(pid,sid,d){const p=items.find(x=>x.id===pid);if(!p)return;const s=p.subs.find(x=>x.id===sid);if(s)s.qty=Math.max(1,s.qty+d);render()}
+function updS(pid,sid,v){const p=items.find(x=>x.id===pid);if(!p)return;const s=p.subs.find(x=>x.id===sid);if(s)s.name=v;save()}
+function delS(pid,sid){const p=items.find(x=>x.id===pid);if(!p)return;p.subs=p.subs.filter(x=>x.id!==sid);toast('🗑 삭제');render()}
+function addSub(pid,inp){const n=inp.value.trim();if(!n)return;const p=items.find(x=>x.id===pid);if(!p)return;p.subs.push({id:uid(),name:n,need:false,qty:1,done:false});inp.value='';toast('✅ 추가');render()}
+
+// Category
+function updCT(cid,v){const c=(cats[asp]||[]).find(x=>x.id===cid);if(c)c.title=v;save()}
+function delCat(cid){const c=(cats[asp]||[]).find(x=>x.id===cid);const n=items.filter(x=>x.space===asp&&x.cat===cid).length;if(c&&confirm(`"${c.title}" (${n}개) 삭제?`)){cats[asp]=cats[asp].filter(x=>x.id!==cid);items=items.filter(x=>!(x.space===asp&&x.cat===cid));toast('🗑 삭제');rTabs();render()}}
+function addCat(){const id='c_'+uid();if(!cats[asp])cats[asp]=[];cats[asp].push({id,icon:'📦',title:'새 카테고리',color:'#E2E3E5'});toast('✅ 추가');render();setTimeout(()=>{const i=document.querySelectorAll('.cat-title-edit');const l=i[i.length-1];if(l){l.focus();l.select()}},80)}
+function openCatEd(cid){const cat=(cats[asp]||[]).find(x=>x.id===cid);if(!cat)return;document.getElementById('mBox').innerHTML=`<div class="modal-title">${esc(cat.title)} — 아이콘/색상</div><div class="emoji-grid">${CI_ICONS.map(e=>`<button class="emoji-opt ${cat.icon===e?'selected':''}" onclick="pCI('${cid}','${e}',this)">${e}</button>`).join('')}</div><div style="font-size:12px;font-weight:600;color:var(--text-sub);text-align:center;margin-bottom:8px">배경색</div><div class="color-row">${COLORS.map(c=>`<div class="color-opt ${cat.color===c?'selected':''}" style="background:${c}" onclick="pCC('${cid}','${c}',this)"></div>`).join('')}</div><div class="modal-actions"><button class="modal-btn primary" onclick="closeM()">확인</button></div>`;document.getElementById('modal').classList.add('show')}
+function pCI(cid,e,el){const c=(cats[asp]||[]).find(x=>x.id===cid);if(c)c.icon=e;el.closest('.emoji-grid').querySelectorAll('.emoji-opt').forEach(x=>x.classList.toggle('selected',x.textContent===e))}
+function pCC(cid,co,el){const c=(cats[asp]||[]).find(x=>x.id===cid);if(c)c.color=co;el.closest('.color-row').querySelectorAll('.color-opt').forEach(x=>x.classList.toggle('selected',x.style.background===co))}
+
+// Space
+function addSp(){const id='sp_'+uid();spaces.push({id,name:'새 구역',icon:'📦'});cats[id]=[];asp=id;toast('✅ 추가');rTabs();render();setTimeout(()=>openSpEd(id),150)}
+function openSpEd(sid){const sp=spaces.find(x=>x.id===sid);if(!sp)return;document.getElementById('mBox').innerHTML=`<div class="modal-title">구역 설정</div><input class="modal-input" id="spNI" value="${esc(sp.name)}" placeholder="구역 이름"/><div style="font-size:12px;font-weight:600;color:var(--text-sub);text-align:center;margin-bottom:8px">아이콘</div><div class="emoji-grid">${SI_ICONS.map(e=>`<button class="emoji-opt ${sp.icon===e?'selected':''}" onclick="pSI('${sid}','${e}',this)">${e}</button>`).join('')}</div><div class="modal-actions">${spaces.length>1?`<button class="modal-btn danger" onclick="delSp('${sid}')">삭제</button>`:''}<button class="modal-btn primary" onclick="saveSp('${sid}')">저장</button></div>`;document.getElementById('modal').classList.add('show')}
+function pSI(sid,e,el){const sp=spaces.find(x=>x.id===sid);if(sp)sp.icon=e;el.closest('.emoji-grid').querySelectorAll('.emoji-opt').forEach(x=>x.classList.toggle('selected',x.textContent===e))}
+function saveSp(sid){const sp=spaces.find(x=>x.id===sid);if(!sp)return;const n=document.getElementById('spNI').value.trim();if(n)sp.name=n;closeM();rTabs();render();toast('✅ 저장')}
+function delSp(sid){const sp=spaces.find(x=>x.id===sid);if(sp&&confirm(`"${sp.name}" 삭제?`)){spaces=spaces.filter(x=>x.id!==sid);delete cats[sid];items=items.filter(x=>x.space!==sid);if(asp===sid)asp=spaces[0]?.id||'';closeM();toast('🗑 삭제');rTabs();render()}}
+
+// UI
+function closeM(){document.getElementById('modal').classList.remove('show');render()}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeM()});
+function togCol(btn){const col=btn.classList.toggle('collapsed');const b=btn.closest('.cat-header').nextElementSibling;if(col){b.style.maxHeight=b.scrollHeight+'px';requestAnimationFrame(()=>{b.style.maxHeight='0px'})}else{b.style.maxHeight=b.scrollHeight+'px';setTimeout(()=>{b.style.maxHeight='none'},350)}}
+document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');cf=btn.dataset.filter;render()}));
+
+function exportList(){const sp=spaces.find(x=>x.id===asp);const aN=items.filter(d=>d.space===asp&&(d.need||d.subs.some(s=>s.need)));if(!aN.length){toast('구매 필요 물품 없음');return}let t=`📋 ${sp?sp.name:''} 구매 목록\n${'─'.repeat(24)}\n`;(cats[asp]||[]).forEach(cat=>{const ci=aN.filter(d=>d.cat===cat.id);if(!ci.length)return;t+=`\n${cat.icon} ${cat.title}\n`;ci.forEach(it=>{if(it.need)t+=`  ${it.done?'✅':'⬜'} ${it.name} × ${it.qty}개\n`;it.subs.filter(s=>s.need).forEach(s=>{t+=`    ${s.done?'✅':'⬜'} └ ${s.name} × ${s.qty}개\n`})})});const tN=aN.reduce((a,i)=>{let c=i.need?1:0;c+=i.subs.filter(s=>s.need).length;return a+c},0);const tP=aN.reduce((a,i)=>{let c=(i.need&&!i.done)?1:0;c+=i.subs.filter(s=>s.need&&!s.done).length;return a+c},0);t+=`\n${'─'.repeat(24)}\n총 ${tN}건 | 미완료 ${tP}건`;navigator.clipboard.writeText(t).then(()=>toast('📋 복사됨')).catch(()=>toast('복사 실패'))}
+
+function save(){localStorage.setItem('cl_v6',JSON.stringify({spaces,cats,items,asp,history}))}
+function manualSave(){save();toast('💾 저장됨')}
+function loadData(){const s=localStorage.getItem('cl_v6');if(s){const d=JSON.parse(s);spaces=d.spaces;cats=d.cats;items=d.items;asp=d.asp||spaces[0]?.id||'';history=d.history||[];rTabs();render();toast('📂 불러옴')}else toast('저장 데이터 없음')}
+function resetAll(){if(confirm('모든 데이터를 초기화?')){localStorage.removeItem('cl_v6');openSubs={};buildDef();rTabs();render();toast('🔄 초기화')}}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200)}
+
+// ═══════════════════════════════════════
+// ADMIN MODE
+// ═══════════════════════════════════════
+function showPwModal(){
+  document.getElementById('pwInput').value='';
+  document.getElementById('pwError').textContent='';
+  document.getElementById('pwOverlay').classList.add('show');
+  setTimeout(()=>document.getElementById('pwInput').focus(),200);
+}
+document.getElementById('pwOverlay').addEventListener('click',function(e){if(e.target===this){this.classList.remove('show')}});
+function checkPw(){
+  const v=document.getElementById('pwInput').value;
+  if(v===ADMIN_PW){document.getElementById('pwOverlay').classList.remove('show');openAdmin()}
+  else{document.getElementById('pwError').textContent='비밀번호가 올바르지 않습니다';document.getElementById('pwInput').value='';document.getElementById('pwInput').focus()}
+}
+
+let adminMonth='',adminSpace='all';
+function openAdmin(){
+  const now=new Date();adminMonth=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');adminSpace='all';
+  document.getElementById('adminOverlay').classList.add('show');
+  renderAdmin();
+}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('show')}
+
+function renderAdmin(){
+  const body=document.getElementById('adminBody');
+  // Generate month options (last 12 months)
+  const months=[];const now=new Date();
+  for(let i=0;i<12;i++){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'))}
+  const spOpts=spaces.map(s=>`<option value="${s.id}" ${adminSpace===s.id?'selected':''}>${s.icon} ${esc(s.name)}</option>`).join('');
+
+  // Filter history
+  const filtered=history.filter(h=>{
+    const hMonth=h.date.slice(0,7);
+    if(hMonth!==adminMonth)return false;
+    if(adminSpace!=='all'){const sp=spaces.find(s=>s.name===h.spaceName);if(!sp||sp.id!==adminSpace)return false}
+    return true;
+  });
+
+  // Stats
+  const totalItems=filtered.length;
+  const totalQty=filtered.reduce((a,h)=>a+h.qty,0);
+  const uniqueItems=[...new Set(filtered.map(h=>h.sub||h.item))].length;
+  const catCounts={};filtered.forEach(h=>{catCounts[h.catName]=(catCounts[h.catName]||0)+h.qty});
+  const topCats=Object.entries(catCounts).sort((a,b)=>b[1]-a[1]);
+  const maxCatQty=topCats[0]?topCats[0][1]:0;
+
+  // Space breakdown
+  const spaceCounts={};filtered.forEach(h=>{spaceCounts[h.spaceName]=(spaceCounts[h.spaceName]||0)+h.qty});
+  const topSpaces=Object.entries(spaceCounts).sort((a,b)=>b[1]-a[1]);
+  const maxSpQty=topSpaces[0]?topSpaces[0][1]:0;
+
+  // Monthly label
+  const [y,m]=adminMonth.split('-');
+  const monthLabel=`${y}년 ${parseInt(m)}월`;
+
+  body.innerHTML=`
+    <div class="admin-controls">
+      <select class="admin-select" onchange="adminMonth=this.value;renderAdmin()">
+        ${months.map(m=>{const [y2,m2]=m.split('-');return `<option value="${m}" ${m===adminMonth?'selected':''}>${y2}년 ${parseInt(m2)}월</option>`}).join('')}
+      </select>
+      <select class="admin-select" onchange="adminSpace=this.value;renderAdmin()">
+        <option value="all" ${adminSpace==='all'?'selected':''}>전체 구역</option>
+        ${spOpts}
+      </select>
+      <button class="admin-btn outline" onclick="exportAdminCSV()">📥 CSV 내보내기</button>
+      <button class="admin-btn outline" onclick="copyAdminReport()">📋 리포트 복사</button>
+      <button class="admin-btn danger-btn" onclick="clearHistory()" style="margin-left:auto">🗑 내역 초기화</button>
+    </div>
+
+    <div class="admin-summary">
+      <div class="a-card"><div class="a-card-label">📅 ${monthLabel} 총 구매 건수</div><div class="a-card-value purple">${totalItems}</div><div class="a-card-sub">건</div></div>
+      <div class="a-card"><div class="a-card-label">📦 총 구매 수량</div><div class="a-card-value green">${totalQty}</div><div class="a-card-sub">개</div></div>
+      <div class="a-card"><div class="a-card-label">🏷️ 구매 품목 종류</div><div class="a-card-value orange">${uniqueItems}</div><div class="a-card-sub">종</div></div>
+      <div class="a-card"><div class="a-card-label">📊 일평균 구매</div><div class="a-card-value blue">${totalItems>0?(totalQty/new Date(parseInt(y),parseInt(m),0).getDate()).toFixed(1):'0'}</div><div class="a-card-sub">개/일</div></div>
+    </div>
+
+    ${topCats.length>0?`<div class="chart-section">
+      <div class="chart-title">📊 카테고리별 구매 수량</div>
+      <div class="chart-bar-wrap">${topCats.map(([name,qty])=>`<div class="chart-row"><div class="chart-label">${esc(name)}</div><div class="chart-bar-bg"><div class="chart-bar purple" style="width:${Math.max(8,qty/maxCatQty*100)}%">${qty}</div></div><div class="chart-val">${qty}개</div></div>`).join('')}</div>
+    </div>`:''}
+
+    ${topSpaces.length>1?`<div class="chart-section">
+      <div class="chart-title">🏢 구역별 구매 수량</div>
+      <div class="chart-bar-wrap">${topSpaces.map(([name,qty])=>`<div class="chart-row"><div class="chart-label">${esc(name)}</div><div class="chart-bar-bg"><div class="chart-bar green" style="width:${Math.max(8,qty/maxSpQty*100)}%">${qty}</div></div><div class="chart-val">${qty}개</div></div>`).join('')}</div>
+    </div>`:''}
+
+    <div class="history-section">
+      <div class="history-title">
+        <span>📋 구매 상세 내역 (${filtered.length}건)</span>
+      </div>
+      ${filtered.length>0?`<div style="overflow-x:auto"><table class="history-table">
+        <thead><tr><th>날짜</th><th>구역</th><th>카테고리</th><th>물품</th><th>세부항목</th><th>수량</th></tr></thead>
+        <tbody>${[...filtered].reverse().map(h=>{const d=new Date(h.date);const ds=`${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;return `<tr><td class="h-date">${ds}</td><td><span class="h-space-tag">${esc(h.spaceName)}</span></td><td><span class="h-cat-tag">${esc(h.catName)}</span></td><td>${esc(h.item)}</td><td>${h.sub?esc(h.sub):'-'}</td><td class="h-qty">${h.qty}개</td></tr>`}).join('')}</tbody>
+      </table></div>`:`<div class="h-empty">📭 해당 월의 구매 내역이 없습니다</div>`}
+    </div>`;
+}
+
+function exportAdminCSV(){
+  const filtered=getFilteredHistory();
+  if(!filtered.length){toast('내보낼 내역 없음');return}
+  let csv='\uFEFF날짜,구역,카테고리,물품,세부항목,수량\n';
+  filtered.forEach(h=>{const d=new Date(h.date);csv+=`${d.toLocaleDateString('ko-KR')},${h.spaceName},${h.catName},${h.item},${h.sub||'-'},${h.qty}\n`});
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download=`구매내역_${adminMonth}.csv`;a.click();URL.revokeObjectURL(url);
+  toast('📥 CSV 다운로드됨');
+}
+function copyAdminReport(){
+  const filtered=getFilteredHistory();
+  const [y,m]=adminMonth.split('-');
+  let t=`📊 ${y}년 ${parseInt(m)}월 구매 내역 리포트\n${'═'.repeat(30)}\n\n`;
+  t+=`총 ${filtered.length}건 / ${filtered.reduce((a,h)=>a+h.qty,0)}개\n\n`;
+  const catC={};filtered.forEach(h=>{catC[h.catName]=(catC[h.catName]||0)+h.qty});
+  Object.entries(catC).sort((a,b)=>b[1]-a[1]).forEach(([n,q])=>{t+=`  ${n}: ${q}개\n`});
+  t+=`\n${'─'.repeat(30)}\n상세:\n`;
+  [...filtered].reverse().forEach(h=>{const d=new Date(h.date);t+=`  ${d.getMonth()+1}/${d.getDate()} | ${h.spaceName} | ${h.item}${h.sub?' > '+h.sub:''} × ${h.qty}개\n`});
+  navigator.clipboard.writeText(t).then(()=>toast('📋 리포트 복사됨'));
+}
+function clearHistory(){
+  if(confirm('모든 구매 내역을 삭제하시겠습니까?\n(이 작업은 되돌릴 수 없습니다)')){
+    history=[];save();renderAdmin();toast('🗑 내역 초기화됨');
+  }
+}
+function getFilteredHistory(){
+  return history.filter(h=>{const hM=h.date.slice(0,7);if(hM!==adminMonth)return false;if(adminSpace!=='all'){const sp=spaces.find(s=>s.name===h.spaceName);if(!sp||sp.id!==adminSpace)return false}return true});
+}
+
+init();
+</script>
+</body>
+</html>
