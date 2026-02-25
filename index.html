@@ -6,7 +6,7 @@
 <title>상비물품 체크리스트</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F4F1EB;--card:#FFF;--primary:#2D5A3D;--primary-light:#3A7650;--primary-pale:#E8F0EB;--accent:#D4763A;--accent-light:#F5E6D8;--danger:#C0392B;--danger-light:#FDECEA;--text:#2C2C2C;--text-sub:#7A7A7A;--border:#E2DDD5;--shadow:0 2px 12px rgba(0,0,0,.06);--shadow-lg:0 8px 32px rgba(0,0,0,.08);--radius:14px;--complete:#27AE60;--incomplete:#E67E22;--sub-bg:#FAFAF7;--sub-border:#EDE9E2;--admin:#F4F1EB;--admin-card:#FFFFFF;--admin-border:#E2DDD5;--admin-accent:#2D5A3D}
+:root{--bg:#F1F5F9;--card:#FFF;--primary:#1B2A4A;--primary-light:#2C4A7C;--primary-pale:#DBEAFE;--accent:#3B82F6;--accent-light:#DBEAFE;--danger:#EF4444;--danger-light:#FEF2F2;--text:#1E293B;--text-sub:#64748B;--border:#E2E8F0;--shadow:0 2px 12px rgba(0,0,0,.06);--shadow-lg:0 8px 32px rgba(0,0,0,.08);--radius:14px;--complete:#10B981;--incomplete:#F59E0B;--sub-bg:#F8FAFC;--sub-border:#E2E8F0;--admin:#F1F5F9;--admin-card:#FFFFFF;--admin-border:#E2E8F0;--admin-accent:#1B2A4A}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:100px}
 
@@ -191,7 +191,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .admin-btn:hover{opacity:.85;transform:translateY(-1px)}
 .admin-btn.outline{background:transparent;border:1.5px solid var(--admin-border);color:var(--text-sub)}
 .admin-btn.outline:hover{border-color:var(--primary);color:var(--primary)}
-.admin-btn.danger-btn{background:#E74C3C}
+.admin-btn.danger-btn{background:#EF4444}
 
 /* Summary cards */
 .admin-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
@@ -199,8 +199,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .a-card-label{font-size:11px;color:var(--text-sub);font-weight:500;margin-bottom:6px}
 .a-card-value{font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:var(--text)}
 .a-card-value.purple{color:var(--admin-accent)}
-.a-card-value.green{color:#27AE60}
-.a-card-value.orange{color:#E67E22}
+.a-card-value.green{color:#10B981}
+.a-card-value.orange{color:#F59E0B}
 .a-card-value.blue{color:#2980B9}
 .a-card-sub{font-size:11px;color:var(--text-sub);margin-top:4px}
 
@@ -212,9 +212,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .chart-label{width:100px;font-size:12px;color:var(--text-sub);text-align:right;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chart-bar-bg{flex:1;height:26px;background:rgba(0,0,0,.04);border-radius:8px;overflow:hidden;position:relative}
 .chart-bar{height:100%;border-radius:8px;transition:width .6s ease;display:flex;align-items:center;padding-left:10px;font-size:11px;font-weight:700;color:#fff;min-width:fit-content}
-.chart-bar.purple{background:linear-gradient(90deg,var(--admin-accent),#3A7650)}
-.chart-bar.green{background:linear-gradient(90deg,#27AE60,#2ECC71)}
-.chart-bar.orange{background:linear-gradient(90deg,#E67E22,#F39C12)}
+.chart-bar.purple{background:linear-gradient(90deg,var(--admin-accent),#2C4A7C)}
+.chart-bar.green{background:linear-gradient(90deg,#10B981,#34D399)}
+.chart-bar.orange{background:linear-gradient(90deg,#F59E0B,#FBBF24)}
 .chart-bar.blue{background:linear-gradient(90deg,#2980B9,#3498DB)}
 .chart-val{font-size:12px;color:var(--text-sub);width:50px;text-align:right;flex-shrink:0;font-family:'Outfit',sans-serif;font-weight:700}
 
@@ -238,7 +238,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .pw-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;background:#fff;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:15px;outline:none;text-align:center;letter-spacing:4px;margin-bottom:6px}
 .pw-input:focus{border-color:var(--primary)}
 .pw-input::placeholder{letter-spacing:0;color:#C5C0B8}
-.pw-error{color:#E74C3C;font-size:12px;height:20px;margin-bottom:10px}
+.pw-error{color:#EF4444;font-size:12px;height:20px;margin-bottom:10px}
 .pw-btn{width:100%;padding:12px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s}
 .pw-btn:hover{background:var(--primary-light)}
 
@@ -312,9 +312,9 @@ const ADMIN_PW='ice080303';
 const DS=[{id:'pantry',name:'탕비실',icon:'☕'},{id:'office',name:'사무실',icon:'🏢'}];
 const SI_ICONS=['☕','🏢','🏠','📦','🔧','🚗','💊','🎨','📚','🏪','🧪','🌿'];
 const CI_ICONS=['☕','🍪','🍽️','🧹','⚡','🏥','🧊','🍜','🥤','📦','🧴','💡','🔧','🎒','🧻','🪣','🍵','✏️','📄','📁','💻','🧼','🖨️','🗂️'];
-const COLORS=['#E8D5B7','#F5D5C8','#D5E8D4','#D4E4F7','#E8E0F0','#FCE4E4','#FFF3CD','#D4EDDA','#CCE5FF','#F8D7DA','#E2E3E5','#D6D8DB'];
-const DC={pantry:[{id:'drinks',icon:'☕',title:'음료류',color:'#E8D5B7',items:[{name:'커피',note:'종류별 구비',subs:['원두커피','믹스커피','캡슐커피','스타벅스 스틱']},{name:'티백',note:'다양한 종류',subs:['녹차','홍차','허브티','캐모마일']},{name:'코코아/율무차',note:'겨울철',subs:[]},{name:'생수',note:'필수',subs:['500ml','2L']},{name:'음료',note:'회의용',subs:['주스','탄산음료','이온음료']},{name:'우유/두유',note:'유통기한 주의',subs:['흰우유','두유','귀리음료']}]},{id:'snacks',icon:'🍪',title:'다과/간식류',color:'#F5D5C8',items:[{name:'과자/비스킷',note:'개별포장',subs:['크래커','쿠키','웨하스']},{name:'견과류',note:'건강간식',subs:['믹스넛','아몬드','캐슈넛']},{name:'사탕/초콜릿',note:'접대용',subs:['사탕','초콜릿','젤리']},{name:'에너지바',note:'야근 대비',subs:[]},{name:'컵라면/즉석식품',note:'비상식량',subs:['컵라면','즉석밥','즉석국']},{name:'설탕/시럽/프림',note:'커피 부자재',subs:['설탕','시럽','프림']}]},{id:'kitchen',icon:'🍽️',title:'주방/식기류',color:'#D5E8D4',items:[{name:'종이컵',note:'소모량 체크',subs:['일반','큰것']},{name:'일회용 수저',note:'',subs:['나무젓가락','숟가락','포크']},{name:'머그컵/텀블러',note:'',subs:[]},{name:'냅킨/키친타월',note:'',subs:['냅킨','키친타월']},{name:'지퍼백/비닐봉투',note:'',subs:['지퍼백(소)','지퍼백(대)','비닐봉투']}]},{id:'cleaning',icon:'🧹',title:'위생/청소용품',color:'#D4E4F7',items:[{name:'주방세제/수세미',note:'',subs:['주방세제','수세미','철수세미']},{name:'행주/걸레',note:'',subs:[]},{name:'쓰레기봉투',note:'',subs:['일반(소)','일반(대)','재활용']},{name:'핸드워시',note:'',subs:[]},{name:'핸드타올',note:'',subs:[]}]},{id:'p_supply',icon:'⚡',title:'비품/소모품',color:'#E8E0F0',items:[{name:'정수기 필터',note:'3~6개월',subs:[]},{name:'커피머신 관리',note:'',subs:['세정제','필터','물때제거제']},{name:'건전지',note:'',subs:['AA','AAA']}]},{id:'emergency',icon:'🏥',title:'비상/구급용품',color:'#FCE4E4',items:[{name:'구급상자',note:'분기별 점검',subs:['밴드','소독약','거즈','핀셋']},{name:'상비약',note:'유통기한',subs:['두통약','소화제','지사제','해열제']},{name:'마스크',note:'',subs:['KF94','덴탈마스크']},{name:'손소독제',note:'',subs:[]}]}],
-office:[{id:'stationery',icon:'✏️',title:'문구류',color:'#FFF3CD',items:[{name:'필기구',note:'',subs:['볼펜','사인펜','형광펜','네임펜']},{name:'연필/샤프',note:'',subs:['연필','샤프','지우개','샤프심']},{name:'메모지/포스트잇',note:'',subs:['포스트잇(소)','포스트잇(대)','메모지']},{name:'스테이플러/심',note:'',subs:['스테이플러','심','제침기']},{name:'가위/풀/테이프',note:'',subs:['가위','딱풀','테이프']},{name:'클립류',note:'',subs:['종이클립','바인더클립(소)','바인더클립(대)']}]},{id:'paper',icon:'📄',title:'용지/인쇄',color:'#CCE5FF',items:[{name:'복사용지',note:'',subs:['A4','A3']},{name:'프린터 소모품',note:'기종확인',subs:['토너(검정)','토너(컬러)','잉크카트리지']},{name:'봉투',note:'',subs:['서류봉투','우편봉투','대봉투']}]},{id:'organize',icon:'📁',title:'정리/수납',color:'#D4EDDA',items:[{name:'화일/클리어파일',note:'',subs:['클리어파일','L자홀더']},{name:'바인더',note:'',subs:['링바인더','레버화일','인덱스탭']}]},{id:'tech',icon:'💻',title:'IT/전자기기',color:'#E8E0F0',items:[{name:'충전케이블',note:'공용 비치',subs:['C타입','8핀','5핀']},{name:'멀티탭',note:'안전인증',subs:['멀티탭(3구)','멀티탭(6구)','연장선']},{name:'건전지',note:'',subs:['AA','AAA']}]},{id:'o_clean',icon:'🧼',title:'사무실 위생',color:'#D4E4F7',items:[{name:'티슈/핸드타올',note:'',subs:['각티슈','미니티슈','핸드타올']},{name:'물티슈',note:'',subs:[]},{name:'쓰레기봉투',note:'',subs:['일반(소)','재활용']},{name:'손소독제',note:'',subs:[]},{name:'청소용품',note:'',subs:['먼지떨이','물걸레']}]}]};
+const COLORS=['#DBEAFE','#E0E7FF','#D1FAE5','#CFFAFE','#EDE9FE','#FEE2E2','#FEF3C7','#D1FAE5','#DBEAFE','#FFE4E6','#E2E8F0','#F1F5F9'];
+const DC={pantry:[{id:'drinks',icon:'☕',title:'음료류',color:'#DBEAFE',items:[{name:'커피',note:'종류별 구비',subs:['원두커피','믹스커피','캡슐커피','스타벅스 스틱']},{name:'티백',note:'다양한 종류',subs:['녹차','홍차','허브티','캐모마일']},{name:'코코아/율무차',note:'겨울철',subs:[]},{name:'생수',note:'필수',subs:['500ml','2L']},{name:'음료',note:'회의용',subs:['주스','탄산음료','이온음료']},{name:'우유/두유',note:'유통기한 주의',subs:['흰우유','두유','귀리음료']}]},{id:'snacks',icon:'🍪',title:'다과/간식류',color:'#E0E7FF',items:[{name:'과자/비스킷',note:'개별포장',subs:['크래커','쿠키','웨하스']},{name:'견과류',note:'건강간식',subs:['믹스넛','아몬드','캐슈넛']},{name:'사탕/초콜릿',note:'접대용',subs:['사탕','초콜릿','젤리']},{name:'에너지바',note:'야근 대비',subs:[]},{name:'컵라면/즉석식품',note:'비상식량',subs:['컵라면','즉석밥','즉석국']},{name:'설탕/시럽/프림',note:'커피 부자재',subs:['설탕','시럽','프림']}]},{id:'kitchen',icon:'🍽️',title:'주방/식기류',color:'#D1FAE5',items:[{name:'종이컵',note:'소모량 체크',subs:['일반','큰것']},{name:'일회용 수저',note:'',subs:['나무젓가락','숟가락','포크']},{name:'머그컵/텀블러',note:'',subs:[]},{name:'냅킨/키친타월',note:'',subs:['냅킨','키친타월']},{name:'지퍼백/비닐봉투',note:'',subs:['지퍼백(소)','지퍼백(대)','비닐봉투']}]},{id:'cleaning',icon:'🧹',title:'위생/청소용품',color:'#CFFAFE',items:[{name:'주방세제/수세미',note:'',subs:['주방세제','수세미','철수세미']},{name:'행주/걸레',note:'',subs:[]},{name:'쓰레기봉투',note:'',subs:['일반(소)','일반(대)','재활용']},{name:'핸드워시',note:'',subs:[]},{name:'핸드타올',note:'',subs:[]}]},{id:'p_supply',icon:'⚡',title:'비품/소모품',color:'#EDE9FE',items:[{name:'정수기 필터',note:'3~6개월',subs:[]},{name:'커피머신 관리',note:'',subs:['세정제','필터','물때제거제']},{name:'건전지',note:'',subs:['AA','AAA']}]},{id:'emergency',icon:'🏥',title:'비상/구급용품',color:'#FEE2E2',items:[{name:'구급상자',note:'분기별 점검',subs:['밴드','소독약','거즈','핀셋']},{name:'상비약',note:'유통기한',subs:['두통약','소화제','지사제','해열제']},{name:'마스크',note:'',subs:['KF94','덴탈마스크']},{name:'손소독제',note:'',subs:[]}]}],
+office:[{id:'stationery',icon:'✏️',title:'문구류',color:'#FEF3C7',items:[{name:'필기구',note:'',subs:['볼펜','사인펜','형광펜','네임펜']},{name:'연필/샤프',note:'',subs:['연필','샤프','지우개','샤프심']},{name:'메모지/포스트잇',note:'',subs:['포스트잇(소)','포스트잇(대)','메모지']},{name:'스테이플러/심',note:'',subs:['스테이플러','심','제침기']},{name:'가위/풀/테이프',note:'',subs:['가위','딱풀','테이프']},{name:'클립류',note:'',subs:['종이클립','바인더클립(소)','바인더클립(대)']}]},{id:'paper',icon:'📄',title:'용지/인쇄',color:'#DBEAFE',items:[{name:'복사용지',note:'',subs:['A4','A3']},{name:'프린터 소모품',note:'기종확인',subs:['토너(검정)','토너(컬러)','잉크카트리지']},{name:'봉투',note:'',subs:['서류봉투','우편봉투','대봉투']}]},{id:'organize',icon:'📁',title:'정리/수납',color:'#D1FAE5',items:[{name:'화일/클리어파일',note:'',subs:['클리어파일','L자홀더']},{name:'바인더',note:'',subs:['링바인더','레버화일','인덱스탭']}]},{id:'tech',icon:'💻',title:'IT/전자기기',color:'#EDE9FE',items:[{name:'충전케이블',note:'공용 비치',subs:['C타입','8핀','5핀']},{name:'멀티탭',note:'안전인증',subs:['멀티탭(3구)','멀티탭(6구)','연장선']},{name:'건전지',note:'',subs:['AA','AAA']}]},{id:'o_clean',icon:'🧼',title:'사무실 위생',color:'#CFFAFE',items:[{name:'티슈/핸드타올',note:'',subs:['각티슈','미니티슈','핸드타올']},{name:'물티슈',note:'',subs:[]},{name:'쓰레기봉투',note:'',subs:['일반(소)','재활용']},{name:'손소독제',note:'',subs:[]},{name:'청소용품',note:'',subs:['먼지떨이','물걸레']}]}]};
 
 let spaces=[],cats={},items=[],asp='',cf='all',openSubs={};
 let history=[]; // {id,date,space,spaceName,cat,catName,item,sub,qty}
