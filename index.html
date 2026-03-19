@@ -181,8 +181,91 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .floor-tag{font-size:10px;padding:1px 7px;border-radius:100px;font-weight:600;font-family:'Outfit','Noto Sans KR',sans-serif;background:#EEF2FF;color:#4338CA;white-space:nowrap}
 .floor-tag.f-done{background:#ECFDF5;color:#059669;text-decoration:line-through}
 
-@media print{body{background:#fff}.controls,.add-item-row,.footer-actions,.btn-action,.qty-btn,.filter-btn,.item-delete,.small-btn,.add-category-row,.add-cat-btn,.add-space-tab,.tab-edit-btn,.sub-add-row,.sub-del,.expand-toggle,.drag-handle,.floor-bar{display:none!important}.item-card,.sub-item{box-shadow:none;border:1px solid #ddd}.header{background:#fff!important;color:#000!important;padding:20px}.stat-card{box-shadow:none;border:1px solid #ddd}.sub-panel.open{padding-left:40px}}
-@media(max-width:600px){.header h1{font-size:21px}.header-inner{flex-direction:column;align-items:flex-start;gap:12px}.stat-num{font-size:22px}.item-main{grid-template-columns:auto auto 1fr auto auto;gap:6px;padding:10px 10px}.qty-control{display:none!important}.sub-qty{display:none!important}.sub-panel.open{padding-left:24px}.space-tab{padding:10px 14px 8px;font-size:13px}.floor-btn{font-size:14px;padding:10px 0}}
+/* ═══ FLOATING SAVE BUTTON ═══ */
+.fab-save{position:fixed;bottom:24px;right:24px;z-index:50;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(59,130,246,.4);display:flex;align-items:center;justify-content:center;transition:all .3s;-webkit-tap-highlight-color:transparent}
+.fab-save:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(59,130,246,.5)}
+.fab-save:active{transform:scale(.95)}
+.fab-save.saved{background:var(--complete);box-shadow:0 4px 16px rgba(16,185,129,.4)}
+.save-indicator{position:fixed;bottom:88px;right:14px;z-index:50;background:rgba(16,185,129,.95);color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;white-space:nowrap}
+.save-indicator.show{opacity:1;transform:translateY(0)}
+
+@media print{body{background:#fff}.controls,.add-item-row,.footer-actions,.btn-action,.qty-btn,.filter-btn,.item-delete,.small-btn,.add-category-row,.add-cat-btn,.add-space-tab,.tab-edit-btn,.sub-add-row,.sub-del,.expand-toggle,.drag-handle,.floor-bar,.fab-save,.save-indicator{display:none!important}.item-card,.sub-item{box-shadow:none;border:1px solid #ddd}.header{background:#fff!important;color:#000!important;padding:20px}.stat-card{box-shadow:none;border:1px solid #ddd}.sub-panel.open{padding-left:40px}}
+
+/* ═══ MOBILE OPTIMIZATION ═══ */
+@media(max-width:640px){
+  body{padding-bottom:100px;-webkit-text-size-adjust:100%}
+  .header{padding:20px 16px 40px}
+  .header h1{font-size:19px}
+  .header-inner{flex-direction:column;align-items:flex-start;gap:6px}
+  .header-icon{font-size:24px;margin-bottom:4px}
+  .header p{font-size:11px}
+  .floor-bar{margin:-22px 8px 0}
+  .floor-btn{font-size:13px;padding:10px 0;gap:4px}
+  .floor-badge{font-size:10px;padding:1px 6px}
+  .space-tabs-wrap{padding:0 8px}
+  .space-tabs{gap:4px}
+  .space-tab{padding:9px 10px 7px;font-size:12px;gap:4px;border-radius:10px 10px 0 0}
+  .tab-badge{font-size:10px;padding:1px 6px}
+  .add-space-tab{padding:8px 12px;font-size:16px;border-radius:10px 10px 0 0}
+  .stats-bar{margin:10px 8px;padding:0;gap:6px}
+  .stat-card{padding:10px 6px;border-radius:10px}
+  .stat-num{font-size:20px}
+  .stat-label{font-size:10px}
+  .controls{padding:0 8px;gap:4px;margin-bottom:8px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .controls::-webkit-scrollbar{display:none}
+  .filter-btn{padding:7px 12px;font-size:11px;white-space:nowrap;flex-shrink:0}
+  .btn-action{padding:7px 12px;font-size:11px;white-space:nowrap;flex-shrink:0;margin-left:0}
+  .container{padding:0 8px}
+  .category{margin-bottom:10px}
+  .cat-header{padding:6px 2px;gap:4px}
+  .cat-icon-btn{width:30px;height:30px;font-size:15px;border-radius:8px}
+  .cat-title-edit{font-size:13px;padding:3px 4px}
+  .cat-count{font-size:9px;padding:2px 7px}
+  .small-btn{display:none}
+  .item-card{border-radius:10px;margin-bottom:5px}
+  .item-main{grid-template-columns:auto 1fr auto auto auto;gap:5px;padding:10px 8px}
+  .drag-handle{display:none!important}
+  .need-check{width:30px;height:30px;border-radius:8px}
+  .need-check.checked::after{font-size:15px}
+  .item-name-edit{font-size:14px;padding:2px 4px}
+  .item-note-edit{font-size:11px;padding:1px 4px}
+  .expand-toggle{width:28px;height:28px;font-size:11px;border-radius:7px}
+  .qty-control{display:none!important}
+  .status-toggle{padding:6px 10px;font-size:11px;min-height:30px}
+  .item-delete{width:28px;height:28px;font-size:12px}
+  .sub-panel.open{padding:6px 6px 6px 16px}
+  .sub-item{grid-template-columns:auto 1fr auto auto;gap:4px;padding:8px;border-radius:8px}
+  .sub-item .drag-handle{display:none!important}
+  .sub-check{width:26px;height:26px;border-radius:6px}
+  .sub-check.checked::after{font-size:12px}
+  .sub-name-edit{font-size:13px;padding:2px 4px}
+  .sub-qty{display:none!important}
+  .sub-status{padding:4px 8px;font-size:10px;min-height:26px}
+  .sub-del{width:26px;height:26px;font-size:11px}
+  .sub-add-row{gap:4px;margin-top:3px}
+  .sub-add-input{padding:9px 10px;font-size:13px;border-radius:8px}
+  .sub-add-btn{width:34px;height:34px;border-radius:8px;font-size:17px}
+  .add-item-row{gap:4px;padding:4px 0}
+  .add-input{padding:11px 12px;font-size:14px;border-radius:8px}
+  .add-btn{width:40px;height:40px;border-radius:8px;font-size:20px}
+  .add-category-row{padding:0 8px;margin:6px auto 0}
+  .add-cat-btn{padding:14px;font-size:13px;border-radius:10px}
+  .footer-actions{padding:0 8px;gap:6px;margin:14px auto 0;flex-wrap:wrap}
+  .footer-btn{padding:11px 12px;font-size:12px;border-radius:10px;flex:1 1 calc(50% - 3px);justify-content:center;min-width:0}
+  .modal-box{width:92vw;padding:18px;border-radius:16px}
+  .modal-title{font-size:14px;margin-bottom:12px}
+  .modal-input{padding:11px 12px;font-size:14px;border-radius:8px}
+  .emoji-grid{grid-template-columns:repeat(6,1fr);gap:5px}
+  .emoji-opt{font-size:17px;border-radius:8px}
+  .color-row{gap:6px}
+  .color-opt{width:28px;height:28px}
+  .modal-btn{padding:11px;font-size:13px;border-radius:8px}
+  .fab-save{bottom:16px;right:16px;width:50px;height:50px;font-size:21px}
+  .save-indicator{bottom:74px;right:10px;font-size:11px}
+  .toast{bottom:74px;font-size:12px;padding:9px 16px;border-radius:10px}
+  .floor-tags{gap:3px;margin-top:1px}
+  .floor-tag{font-size:9px;padding:1px 5px}
+}
 </style>
 </head>
 <body>
@@ -225,6 +308,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <!-- ═══ GENERAL MODAL ═══ -->
 <div class="modal-overlay" id="modal"><div class="modal-box" id="mBox"></div></div>
 <div class="toast" id="toast"></div>
+<button class="fab-save" id="fabSave" onclick="manualSave()" title="저장">💾</button>
+<div class="save-indicator" id="saveInd">✓ 저장됨</div>
 
 <script>
 const GRIP_SVG='<svg viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg>';
@@ -361,6 +446,16 @@ document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('clic
 function exportList(){const sp=spaces.find(x=>x.id===asp);const aN=items.filter(d=>d.space===asp&&(gf(d).need||d.subs.some(s=>gf(s).need)));if(!aN.length){toast('구매 필요 물품 없음');return}let t=`📋 [${afl}] ${sp?sp.name:''} 구매 목록\n${'─'.repeat(24)}\n`;(cats[asp]||[]).forEach(cat=>{const ci=aN.filter(d=>d.cat===cat.id);if(!ci.length)return;t+=`\n${cat.icon} ${cat.title}\n`;ci.forEach(it=>{const f=gf(it);if(f.need)t+=`  ${f.done?'✅':'⬜'} ${it.name} × ${f.qty}개\n`;it.subs.filter(s=>gf(s).need).forEach(s=>{const sf=gf(s);t+=`    ${sf.done?'✅':'⬜'} └ ${s.name} × ${sf.qty}개\n`})})});const tN=aN.reduce((a,i)=>{let c=gf(i).need?1:0;c+=i.subs.filter(s=>gf(s).need).length;return a+c},0);const tP=aN.reduce((a,i)=>{let c=(gf(i).need&&!gf(i).done)?1:0;c+=i.subs.filter(s=>gf(s).need&&!gf(s).done).length;return a+c},0);t+=`\n${'─'.repeat(24)}\n총 ${tN}건 | 미완료 ${tP}건`;navigator.clipboard.writeText(t).then(()=>toast('📋 복사됨')).catch(()=>toast('복사 실패'))}
 
 function save(){localStorage.setItem('cl_v7',JSON.stringify({spaces,cats,items,asp,afl}))}
+function manualSave(){
+  save();
+  const btn=document.getElementById('fabSave');
+  btn.classList.add('saved');btn.textContent='✓';
+  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='💾'},1500);
+  const ind=document.getElementById('saveInd');
+  ind.classList.add('show');clearTimeout(ind._t);
+  ind._t=setTimeout(()=>ind.classList.remove('show'),1800);
+  toast('💾 저장 완료');
+}
 function saveToFile(){save();const data=JSON.stringify({spaces,cats,items,asp,afl},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;const dt=new Date();const fn=`상비물품_${dt.getFullYear()}${String(dt.getMonth()+1).padStart(2,'0')}${String(dt.getDate()).padStart(2,'0')}.json`;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);toast('💾 파일 저장 완료')}
 function loadFromFile(){const input=document.createElement('input');input.type='file';input.accept='.json';input.onchange=e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.spaces&&d.cats&&d.items){spaces=d.spaces;cats=d.cats;items=d.items;asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F';save();rFloors();rTabs();render();toast('📂 파일 불러오기 완료')}else{toast('잘못된 파일 형식')}}catch(err){toast('파일 읽기 실패')}};reader.readAsText(file)};input.click()}
 function resetPurchaseStatus(){const sp=spaces.find(s=>s.id===asp);const label=afl==='ALL'?'전체 층':afl;if(!confirm(`[${label}] ${sp?sp.name:''} 구매 상태를 초기화하시겠습니까?\n(물품 목록은 유지됩니다)`))return;const floors=afl==='ALL'?FLOORS:[afl];items.filter(i=>i.space===asp).forEach(it=>{if(!it.floors)it.floors={};floors.forEach(fl=>{if(it.floors[fl]){it.floors[fl].need=false;it.floors[fl].done=false;it.floors[fl].qty=1}});it.subs.forEach(s=>{if(!s.floors)s.floors={};floors.forEach(fl=>{if(s.floors[fl]){s.floors[fl].need=false;s.floors[fl].done=false;s.floors[fl].qty=1}})})});cf='all';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));save();toast('🛒 구매 상태 초기화');rFloors();rTabs();render()}
