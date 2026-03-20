@@ -188,6 +188,16 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .fab-save.saved{background:var(--complete);box-shadow:0 4px 16px rgba(16,185,129,.4)}
 .save-indicator{position:fixed;bottom:88px;right:14px;z-index:50;background:rgba(16,185,129,.95);color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;white-space:nowrap}
 .save-indicator.show{opacity:1;transform:translateY(0)}
+.fab-sync{position:fixed;bottom:88px;right:28px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--card);color:var(--text-sub);border:1px solid var(--border);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);transition:all .2s;-webkit-tap-highlight-color:transparent}
+.fab-sync:active{transform:scale(.9)}
+.sync-dot{width:8px;height:8px;border-radius:50%;position:absolute;top:2px;right:2px;border:1.5px solid #fff}
+.sync-dot.online{background:#10B981}.sync-dot.offline{background:#94A3B8}.sync-dot.error{background:#EF4444}
+.sync-dot.loading{background:#F59E0B;animation:syncPulse 1s infinite}
+@keyframes syncPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sync-info{font-size:11px;color:var(--text-sub);line-height:1.7;margin-bottom:12px}
+.sync-info b{color:var(--text);font-weight:600}
+.sync-steps{font-size:11px;color:var(--text-sub);line-height:1.8;margin-bottom:16px;padding:10px 12px;background:var(--sub-bg);border-radius:8px}
+.sync-steps b{color:var(--text);font-weight:600}
 
 @media print{body{background:#fff}.controls,.add-item-row,.footer-actions,.btn-action,.qty-btn,.filter-btn,.item-delete,.small-btn,.add-category-row,.add-cat-btn,.add-space-tab,.tab-edit-btn,.sub-add-row,.sub-del,.expand-toggle,.drag-handle,.floor-bar,.fab-save,.save-indicator{display:none!important}.item-card,.sub-item{box-shadow:none;border:1px solid #ddd}.header{background:#fff!important;color:#000!important;padding:20px}.stat-card{box-shadow:none;border:1px solid #ddd}.sub-panel.open{padding-left:40px}}
 
@@ -261,6 +271,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   .color-opt{width:28px;height:28px}
   .modal-btn{padding:11px;font-size:13px;border-radius:8px}
   .fab-save{bottom:16px;right:16px;width:50px;height:50px;font-size:21px}
+  .fab-sync{bottom:74px;right:20px;width:34px;height:34px;font-size:14px}
   .save-indicator{bottom:74px;right:10px;font-size:11px}
   .toast{bottom:74px;font-size:12px;padding:9px 16px;border-radius:10px}
   .floor-tags{gap:3px;margin-top:1px}
@@ -310,6 +321,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <div class="toast" id="toast"></div>
 <button class="fab-save" id="fabSave" onclick="manualSave()" title="저장">💾</button>
 <div class="save-indicator" id="saveInd">✓ 저장됨</div>
+<button class="fab-sync" id="fabSync" onclick="showSyncSetup()" title="클라우드 동기화 설정">☁️<span class="sync-dot offline" id="syncStatus"></span></button>
 
 <script>
 const GRIP_SVG='<svg viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg>';
@@ -323,17 +335,94 @@ office:[{id:'stationery',icon:'✏️',title:'문구류',color:'#FEF3C7',items:[
 
 let spaces=[],cats={},items=[],asp='',afl='2F',cf='all',openSubs={};
 
+// ═══ CLOUD SYNC (GitHub API) ═══
+const GH_OWNER='netformrnd',GH_REPO='su_ck',GH_BRANCH='main',GH_FILE='data.json';
+
+async function cloudLoad(){
+  try{
+    const dot=document.getElementById('syncStatus');if(dot)dot.className='sync-dot loading';
+    const pat=localStorage.getItem('gh_pat');
+    const h={'Accept':'application/vnd.github.v3.raw','Cache-Control':'no-cache'};
+    if(pat)h['Authorization']='token '+pat;
+    const r=await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}?ref=${GH_BRANCH}&_=${Date.now()}`,{headers:h});
+    if(!r.ok){if(dot)dot.className='sync-dot '+(pat?'online':'offline');return false}
+    const d=await r.json();
+    if(d.spaces&&d.cats&&d.items){
+      spaces=d.spaces;cats=d.cats;items=d.items;asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F';
+      save();if(dot)dot.className='sync-dot online';return true;
+    }
+  }catch(e){console.log('cloudLoad:',e)}
+  const dot=document.getElementById('syncStatus');if(dot)dot.className='sync-dot offline';
+  return false;
+}
+
+async function cloudSave(){
+  const pat=localStorage.getItem('gh_pat');
+  if(!pat){showSyncSetup();return}
+  const dot=document.getElementById('syncStatus');if(dot)dot.className='sync-dot loading';
+  const data=JSON.stringify({spaces,cats,items,asp,afl},null,2);
+  const content=btoa(unescape(encodeURIComponent(data)));
+  let sha='';
+  try{
+    const r=await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}?ref=${GH_BRANCH}`,{
+      headers:{'Authorization':'token '+pat}});
+    if(r.ok){const d=await r.json();sha=d.sha}
+  }catch(e){}
+  const body={message:'데이터 업데이트 '+new Date().toLocaleString('ko-KR'),content,branch:GH_BRANCH};
+  if(sha)body.sha=sha;
+  try{
+    const r=await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`,{
+      method:'PUT',headers:{'Authorization':'token '+pat,'Content-Type':'application/json'},
+      body:JSON.stringify(body)});
+    if(r.ok){toast('☁️ 클라우드 동기화 완료');if(dot)dot.className='sync-dot online'}
+    else if(r.status===401||r.status===403){toast('⚠️ 토큰 오류 — 설정 확인');if(dot)dot.className='sync-dot error'}
+    else{toast('⚠️ 동기화 실패');if(dot)dot.className='sync-dot error'}
+  }catch(e){toast('⚠️ 네트워크 오류');if(dot)dot.className='sync-dot error'}
+}
+
+function showSyncSetup(){
+  const cur=localStorage.getItem('gh_pat')||'';
+  const status=cur?'<span style="color:#10B981">● 연결됨</span>':'<span style="color:#94A3B8">● 미연결</span>';
+  document.getElementById('mBox').innerHTML=
+    `<div class="modal-title">☁️ 클라우드 동기화 설정</div>`+
+    `<div class="sync-info">상태: ${status}<br>저장 버튼(💾)을 누르면 모든 기기에서<br>동일한 데이터를 볼 수 있습니다.</div>`+
+    `<div class="sync-steps"><b>GitHub 토큰 생성 방법:</b><br>`+
+    `1. <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent)">GitHub 토큰 생성 페이지</a> 접속<br>`+
+    `2. Note: <b>su_ck</b> 입력<br>`+
+    `3. Expiration: <b>No expiration</b> 선택<br>`+
+    `4. ✅ <b>repo</b> 체크<br>`+
+    `5. <b>Generate token</b> 클릭 후 복사</div>`+
+    `<input class="modal-input" id="patInput" type="password" value="${cur}" placeholder="ghp_xxxxxxxxxxxx" style="font-family:monospace;font-size:13px"/>`+
+    `<div class="modal-actions">`+
+    (cur?`<button class="modal-btn danger" onclick="clearPat()">연결 해제</button>`:'')+
+    `<button class="modal-btn" onclick="closeM()">취소</button>`+
+    `<button class="modal-btn primary" onclick="savePat()">저장</button></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function savePat(){
+  const v=document.getElementById('patInput').value.trim();
+  if(v){localStorage.setItem('gh_pat',v);toast('🔑 토큰 저장 완료');
+    document.getElementById('syncStatus').className='sync-dot online';
+    cloudSave();}
+  else{localStorage.removeItem('gh_pat');document.getElementById('syncStatus').className='sync-dot offline'}
+  closeM();
+}
+function clearPat(){localStorage.removeItem('gh_pat');toast('🔑 연결 해제');document.getElementById('syncStatus').className='sync-dot offline';closeM()}
+
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 // Get floor state for item/sub
 function gfAgg(o){if(!o.floors)o.floors={};let need=false,done=true,qty=0,hn=false;FLOORS.forEach(f=>{if(!o.floors[f])o.floors[f]={need:false,qty:1,done:false};if(o.floors[f].need){need=true;hn=true;qty+=o.floors[f].qty;if(!o.floors[f].done)done=false}});if(!hn)done=false;return{need,qty:qty||1,done}}
 function gf(o){if(!o.floors)o.floors={};if(afl==='ALL')return gfAgg(o);if(!o.floors[afl])o.floors[afl]={need:false,qty:1,done:false};return o.floors[afl]}
 
-function init(){
+async function init(){
   const s=localStorage.getItem('cl_v7');
   if(s){const d=JSON.parse(s);spaces=d.spaces;cats=d.cats;items=d.items;asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F'}
   else buildDef();
   updDate();rFloors();rTabs();render();
+  // 클라우드에서 최신 데이터 로드 시도
+  const loaded=await cloudLoad();
+  if(loaded){rFloors();rTabs();render()}
 }
 function buildDef(){
   spaces=DS.map(s=>({...s}));cats={};items=[];
@@ -454,7 +543,9 @@ function manualSave(){
   const ind=document.getElementById('saveInd');
   ind.classList.add('show');clearTimeout(ind._t);
   ind._t=setTimeout(()=>ind.classList.remove('show'),1800);
-  toast('💾 저장 완료');
+  toast('💾 저장 중...');
+  // 클라우드 동기화
+  if(localStorage.getItem('gh_pat')){cloudSave()}else{toast('💾 로컬 저장 완료 (☁️ 동기화 미설정)')}
 }
 function saveToFile(){save();const data=JSON.stringify({spaces,cats,items,asp,afl},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;const dt=new Date();const fn=`상비물품_${dt.getFullYear()}${String(dt.getMonth()+1).padStart(2,'0')}${String(dt.getDate()).padStart(2,'0')}.json`;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);toast('💾 파일 저장 완료')}
 function loadFromFile(){const input=document.createElement('input');input.type='file';input.accept='.json';input.onchange=e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.spaces&&d.cats&&d.items){spaces=d.spaces;cats=d.cats;items=d.items;asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F';save();rFloors();rTabs();render();toast('📂 파일 불러오기 완료')}else{toast('잘못된 파일 형식')}}catch(err){toast('파일 읽기 실패')}};reader.readAsText(file)};input.click()}
