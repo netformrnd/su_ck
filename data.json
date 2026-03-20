@@ -1,0 +1,2706 @@
+{
+  "spaces": [
+    {
+      "id": "pantry",
+      "name": "탕비실",
+      "icon": "☕"
+    },
+    {
+      "id": "office",
+      "name": "사무실",
+      "icon": "🏢"
+    }
+  ],
+  "cats": {
+    "pantry": [
+      {
+        "id": "drinks",
+        "icon": "☕",
+        "title": "음료류",
+        "color": "#DBEAFE"
+      },
+      {
+        "id": "snacks",
+        "icon": "🍪",
+        "title": "다과/간식류",
+        "color": "#E0E7FF"
+      },
+      {
+        "id": "kitchen",
+        "icon": "🍽️",
+        "title": "주방/식기류",
+        "color": "#D1FAE5"
+      },
+      {
+        "id": "cleaning",
+        "icon": "🧹",
+        "title": "위생/청소용품",
+        "color": "#CFFAFE"
+      },
+      {
+        "id": "p_supply",
+        "icon": "⚡",
+        "title": "비품/소모품",
+        "color": "#EDE9FE"
+      },
+      {
+        "id": "emergency",
+        "icon": "🏥",
+        "title": "비상/구급용품",
+        "color": "#FEE2E2"
+      }
+    ],
+    "office": [
+      {
+        "id": "stationery",
+        "icon": "✏️",
+        "title": "문구류",
+        "color": "#FEF3C7"
+      },
+      {
+        "id": "paper",
+        "icon": "📄",
+        "title": "용지/인쇄",
+        "color": "#DBEAFE"
+      },
+      {
+        "id": "organize",
+        "icon": "📁",
+        "title": "정리/수납",
+        "color": "#D1FAE5"
+      },
+      {
+        "id": "tech",
+        "icon": "💻",
+        "title": "IT/전자기기",
+        "color": "#EDE9FE"
+      },
+      {
+        "id": "o_clean",
+        "icon": "🧼",
+        "title": "사무실 위생",
+        "color": "#CFFAFE"
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "mmy4ugm7dq7g0g",
+      "space": "pantry",
+      "cat": "drinks",
+      "name": "커피",
+      "note": "종류별 구비",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm7d3yrh5",
+          "name": "원두커피",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm70ro0wu",
+          "name": "스타벅스 스틱",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm7fmwzp2",
+          "name": "믹스커피(노란색)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm7rqmkuz",
+          "name": "믹스커피(주황색)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4vg1bn373mw",
+          "name": "토피넛라떼",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm7x22n8c",
+      "space": "pantry",
+      "cat": "drinks",
+      "name": "티백",
+      "note": "다양한 종류",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm72qf5i0",
+          "name": "일반 티백(녹차,보리차 등)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm7bgije1",
+          "name": "담터(허브티)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm7hv51cf",
+          "name": "순작(허브티)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm7o9expx",
+      "space": "pantry",
+      "cat": "drinks",
+      "name": "시즌 티",
+      "note": "계절 음료 ",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy59j9xk3v3zm",
+          "name": "코코아",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy59muavdevay",
+          "name": "율무차",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy5aek0g1n0di",
+          "name": "티젠 콤부차",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm86x73rp",
+      "space": "pantry",
+      "cat": "snacks",
+      "name": "과자/비스킷",
+      "note": "개별포장",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm854tdhq",
+          "name": "크래커",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm80k325g",
+          "name": "쿠키",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8qxbvbl",
+          "name": "웨하스",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8tgnn9w",
+      "space": "pantry",
+      "cat": "snacks",
+      "name": "견과류",
+      "note": "건강간식",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8z2cdo8",
+          "name": "믹스넛",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm80jd9br",
+          "name": "아몬드",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8mre6t9",
+          "name": "캐슈넛",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm81qzgxv",
+      "space": "pantry",
+      "cat": "snacks",
+      "name": "사탕/초콜릿",
+      "note": "접대용",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm82xdspa",
+          "name": "사탕",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8yflgdh",
+          "name": "초콜릿",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8pav33m",
+          "name": "젤리",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8bijn2h",
+      "space": "pantry",
+      "cat": "snacks",
+      "name": "에너지바",
+      "note": "야근 대비",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm870431b",
+      "space": "pantry",
+      "cat": "snacks",
+      "name": "컵라면/즉석식품",
+      "note": "비상식량",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8qcqhz8",
+          "name": "컵라면",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8i3q2d2",
+          "name": "즉석밥",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8sf7ngc",
+          "name": "즉석국",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8onhg6w",
+      "space": "pantry",
+      "cat": "snacks",
+      "name": "설탕/시럽/프림",
+      "note": "커피 부자재",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8i9sm1n",
+          "name": "설탕",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm82rmdys",
+          "name": "시럽",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm84x6hh5",
+          "name": "프림",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8909uxs",
+      "space": "pantry",
+      "cat": "kitchen",
+      "name": "종이컵",
+      "note": "소모량 체크",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8bac10d",
+          "name": "일반",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8fmhhdk",
+          "name": "큰것",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8g89a4w",
+      "space": "pantry",
+      "cat": "kitchen",
+      "name": "일회용 수저",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8ch0nvd",
+          "name": "나무젓가락",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8dsa84u",
+          "name": "숟가락",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8csjkgc",
+          "name": "포크",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8u5ufds",
+      "space": "pantry",
+      "cat": "kitchen",
+      "name": "머그컵/텀블러",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm8k48b56",
+      "space": "pantry",
+      "cat": "kitchen",
+      "name": "냅킨/키친타월",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8ki52pv",
+          "name": "냅킨",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8rcxena",
+          "name": "키친타월",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8jmbsse",
+      "space": "pantry",
+      "cat": "kitchen",
+      "name": "지퍼백/비닐봉투",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8mab2kh",
+          "name": "지퍼백(소)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm824sw28",
+          "name": "지퍼백(대)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm86vidjj",
+          "name": "비닐봉투",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8lgxtiq",
+      "space": "pantry",
+      "cat": "cleaning",
+      "name": "주방세제/수세미",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8liqhef",
+          "name": "주방세제",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm80aevfi",
+          "name": "수세미",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm86zjfxs",
+          "name": "철수세미",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm80rfo9q",
+      "space": "pantry",
+      "cat": "cleaning",
+      "name": "행주/걸레",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm8ib0dcs",
+      "space": "pantry",
+      "cat": "cleaning",
+      "name": "쓰레기봉투",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8l6o8xb",
+          "name": "일반(소)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8366gjj",
+          "name": "일반(대)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm80lpx2s",
+          "name": "재활용",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm88wckq2",
+      "space": "pantry",
+      "cat": "cleaning",
+      "name": "핸드워시",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm8xbpk0e",
+      "space": "pantry",
+      "cat": "cleaning",
+      "name": "핸드타올",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm8b9dfaq",
+      "space": "pantry",
+      "cat": "p_supply",
+      "name": "정수기 필터",
+      "note": "3~6개월",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm8x8srac",
+      "space": "pantry",
+      "cat": "p_supply",
+      "name": "커피머신 관리",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8ucopce",
+          "name": "세정제",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm88j6wek",
+          "name": "필터",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8vm95pz",
+          "name": "물때제거제",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8eabn5g",
+      "space": "pantry",
+      "cat": "p_supply",
+      "name": "건전지",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8budxto",
+          "name": "AA",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8oxbm7j",
+          "name": "AAA",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8iyu3k9",
+      "space": "pantry",
+      "cat": "emergency",
+      "name": "구급상자",
+      "note": "분기별 점검",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8z80x2y",
+          "name": "밴드",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8vyloza",
+          "name": "소독약",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8o4hoy8",
+          "name": "거즈",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8hcyshu",
+          "name": "핀셋",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8vlkmmv",
+      "space": "pantry",
+      "cat": "emergency",
+      "name": "상비약",
+      "note": "유통기한",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm86ehd8v",
+          "name": "두통약",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8xacl6p",
+          "name": "소화제",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8xcg65y",
+          "name": "지사제",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8w4k2ql",
+          "name": "해열제",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8ifjneo",
+      "space": "pantry",
+      "cat": "emergency",
+      "name": "마스크",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8p8vpiy",
+          "name": "KF94",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm80s42nr",
+          "name": "덴탈마스크",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8bez9xz",
+      "space": "pantry",
+      "cat": "emergency",
+      "name": "손소독제",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm8lvbwj1",
+      "space": "office",
+      "cat": "stationery",
+      "name": "필기구",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8uavyim",
+          "name": "볼펜",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8udncxm",
+          "name": "사인펜",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8gdh6ps",
+          "name": "형광펜",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8t2auv3",
+          "name": "네임펜",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8p5l4r7",
+      "space": "office",
+      "cat": "stationery",
+      "name": "연필/샤프",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8p1kxts",
+          "name": "연필",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8eoxlp2",
+          "name": "샤프",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8ov7qkb",
+          "name": "지우개",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8wwj1zh",
+          "name": "샤프심",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8ohvexs",
+      "space": "office",
+      "cat": "stationery",
+      "name": "메모지/포스트잇",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8bl14ap",
+          "name": "포스트잇(소)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8gq9szg",
+          "name": "포스트잇(대)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8iyzlnx",
+          "name": "메모지",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8fccp20",
+      "space": "office",
+      "cat": "stationery",
+      "name": "스테이플러/심",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8swadlm",
+          "name": "스테이플러",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8u98i9c",
+          "name": "심",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8av739q",
+          "name": "제침기",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm84uf4an",
+      "space": "office",
+      "cat": "stationery",
+      "name": "가위/풀/테이프",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm80pxe3z",
+          "name": "가위",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8hjvz4q",
+          "name": "딱풀",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm84c64t6",
+          "name": "테이프",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8759oy1",
+      "space": "office",
+      "cat": "stationery",
+      "name": "클립류",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8ptlhhs",
+          "name": "종이클립",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm86o81b0",
+          "name": "바인더클립(소)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8zxxo3l",
+          "name": "바인더클립(대)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm83sbilo",
+      "space": "office",
+      "cat": "paper",
+      "name": "복사용지",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8i2n3xt",
+          "name": "A4",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm844bsgz",
+          "name": "A3",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm87hy2ip",
+      "space": "office",
+      "cat": "paper",
+      "name": "프린터 소모품",
+      "note": "기종확인",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8xqu83x",
+          "name": "토너(검정)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8a57tk9",
+          "name": "토너(컬러)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8fcauoo",
+          "name": "잉크카트리지",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8fdwztn",
+      "space": "office",
+      "cat": "paper",
+      "name": "봉투",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8qd4w0d",
+          "name": "서류봉투",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8jnxbg1",
+          "name": "우편봉투",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm83g2qiy",
+          "name": "대봉투",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm889iswi",
+      "space": "office",
+      "cat": "organize",
+      "name": "화일/클리어파일",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8i1o2jb",
+          "name": "클리어파일",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm82ypfm2",
+          "name": "L자홀더",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8tymrm8",
+      "space": "office",
+      "cat": "organize",
+      "name": "바인더",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm84wzgkt",
+          "name": "링바인더",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm81hsywg",
+          "name": "레버화일",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8jdcclp",
+          "name": "인덱스탭",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm83dzi6f",
+      "space": "office",
+      "cat": "tech",
+      "name": "충전케이블",
+      "note": "공용 비치",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm891tl9v",
+          "name": "C타입",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8pr5qjk",
+          "name": "8핀",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm84srh9x",
+          "name": "5핀",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm81gcmuj",
+      "space": "office",
+      "cat": "tech",
+      "name": "멀티탭",
+      "note": "안전인증",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm80ukhb1",
+          "name": "멀티탭(3구)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm89r7c0p",
+          "name": "멀티탭(6구)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm80woxmp",
+          "name": "연장선",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8jjb4hq",
+      "space": "office",
+      "cat": "tech",
+      "name": "건전지",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8m59vm9",
+          "name": "AA",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8f06mhe",
+          "name": "AAA",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8kcobmj",
+      "space": "office",
+      "cat": "o_clean",
+      "name": "티슈/핸드타올",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8lgjlsb",
+          "name": "각티슈",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm82qzlig",
+          "name": "미니티슈",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm867byc8",
+          "name": "핸드타올",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm80rnl0a",
+      "space": "office",
+      "cat": "o_clean",
+      "name": "물티슈",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm84rm1en",
+      "space": "office",
+      "cat": "o_clean",
+      "name": "쓰레기봉투",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm89v044z",
+          "name": "일반(소)",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8d4yel6",
+          "name": "재활용",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mmy4ugm8dmjri5",
+      "space": "office",
+      "cat": "o_clean",
+      "name": "손소독제",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": []
+    },
+    {
+      "id": "mmy4ugm8iqf346",
+      "space": "office",
+      "cat": "o_clean",
+      "name": "청소용품",
+      "note": "",
+      "floors": {
+        "2F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        },
+        "3F": {
+          "need": false,
+          "qty": 1,
+          "done": false
+        }
+      },
+      "subs": [
+        {
+          "id": "mmy4ugm8nrj0gb",
+          "name": "먼지떨이",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        },
+        {
+          "id": "mmy4ugm8kd2b08",
+          "name": "물걸레",
+          "floors": {
+            "2F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            },
+            "3F": {
+              "need": false,
+              "qty": 1,
+              "done": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "asp": "pantry",
+  "afl": "3F"
+}
