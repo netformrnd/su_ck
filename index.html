@@ -334,22 +334,26 @@ office:[{id:'stationery',icon:'✏️',title:'문구류',color:'#FEF3C7',items:[
 let spaces=[],cats={},items=[],asp='',afl='2F',cf='all',openSubs={};
 
 // ═══ FIREBASE REALTIME SYNC ═══
-const FB_CONFIG={
-  apiKey:"AIzaSyCzngaCcenhH1tmZ7syugpI3H1wYBVhiJQ",
-  authDomain:"test-168a4.firebaseapp.com",
-  databaseURL:"https://test-168a4-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId:"test-168a4",
-  storageBucket:"test-168a4.firebasestorage.app",
-  messagingSenderId:"955362696992",
-  appId:"1:955362696992:web:234b098db17412be27c145"
-};
-let fbApp;
-try{fbApp=firebase.app()}catch(e){fbApp=firebase.initializeApp(FB_CONFIG)}
-const fbDb=firebase.database();
+let fbApp=null,fbDb=null;
 const DB_ROOT='/supply_checklist';
 let isSaving=false;
 
 function initFirebase(){
+  try{
+    if(typeof firebase==='undefined'){console.warn('Firebase SDK not loaded');return}
+    const FB_CONFIG={
+      apiKey:"AIzaSyCzngaCcenhH1tmZ7syugpI3H1wYBVhiJQ",
+      authDomain:"test-168a4.firebaseapp.com",
+      databaseURL:"https://test-168a4-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId:"test-168a4",
+      storageBucket:"test-168a4.firebasestorage.app",
+      messagingSenderId:"955362696992",
+      appId:"1:955362696992:web:234b098db17412be27c145"
+    };
+    try{fbApp=firebase.app()}catch(e){fbApp=firebase.initializeApp(FB_CONFIG)}
+    fbDb=firebase.database();
+  }catch(e){console.error('Firebase init error:',e);return}
+
   // 실시간 데이터 수신
   fbDb.ref(DB_ROOT).on('value',snapshot=>{
     if(isSaving)return;
@@ -358,6 +362,9 @@ function initFirebase(){
       spaces=d.spaces;cats=d.cats;items=d.items;
       asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F';
       save();rFloors();rTabs();render();
+    }else if(spaces.length>0&&items.length>0){
+      // Firebase에 데이터 없으면 현재 로컬 데이터를 업로드
+      cloudSave();
     }
   });
   // 연결 상태 모니터링
@@ -375,6 +382,7 @@ function initFirebase(){
 }
 
 function cloudSave(){
+  if(!fbDb){toast('💾 로컬 저장 완료');return}
   isSaving=true;
   const data={spaces,cats,items,asp,afl,updatedAt:new Date().toISOString()};
   fbDb.ref(DB_ROOT).set(data).then(()=>{
