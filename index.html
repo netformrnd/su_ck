@@ -359,19 +359,9 @@ function initFirebase(){
     if(isSaving)return;
     const d=snapshot.val();
     if(d&&d.spaces&&d.cats&&d.items){
-      spaces=Array.isArray(d.spaces)?d.spaces:Object.values(d.spaces);
-      cats=d.cats;
-      Object.keys(cats).forEach(k=>{if(!Array.isArray(cats[k]))cats[k]=Object.values(cats[k]||{})});
-      items=Array.isArray(d.items)?d.items:Object.values(d.items);
-      // Firebase는 빈 배열([])을 삭제하므로 복원
-      items.forEach(it=>{
-        if(!it.subs)it.subs=[];
-        if(!Array.isArray(it.subs))it.subs=Object.values(it.subs);
-        if(!it.floors)it.floors={};
-        it.subs.forEach(s=>{if(!s.floors)s.floors={}});
-      });
+      spaces=d.spaces;cats=d.cats;items=d.items;
       asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F';
-      save();rFloors();rTabs();render();
+      fixData();save();rFloors();rTabs();render();
     }else if(spaces.length>0&&items.length>0){
       // Firebase에 데이터 없으면 현재 로컬 데이터를 업로드
       cloudSave();
@@ -410,10 +400,23 @@ function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').repla
 function gfAgg(o){if(!o.floors)o.floors={};let need=false,done=true,qty=0,hn=false;FLOORS.forEach(f=>{if(!o.floors[f])o.floors[f]={need:false,qty:1,done:false};if(o.floors[f].need){need=true;hn=true;qty+=o.floors[f].qty;if(!o.floors[f].done)done=false}});if(!hn)done=false;return{need,qty:qty||1,done}}
 function gf(o){if(!o.floors)o.floors={};if(afl==='ALL')return gfAgg(o);if(!o.floors[afl])o.floors[afl]={need:false,qty:1,done:false};return o.floors[afl]}
 
+// Firebase/localStorage에서 로드 후 누락된 배열/객체 복원
+function fixData(){
+  if(!Array.isArray(spaces))spaces=Object.values(spaces||{});
+  if(!Array.isArray(items))items=Object.values(items||{});
+  Object.keys(cats).forEach(k=>{if(!Array.isArray(cats[k]))cats[k]=Object.values(cats[k]||{})});
+  items.forEach(it=>{
+    if(!it.subs)it.subs=[];
+    if(!Array.isArray(it.subs))it.subs=Object.values(it.subs);
+    if(!it.floors)it.floors={};
+    it.subs.forEach(s=>{if(!s.floors)s.floors={}});
+  });
+}
 function init(){
   const s=localStorage.getItem('cl_v7');
   if(s){const d=JSON.parse(s);spaces=d.spaces;cats=d.cats;items=d.items;asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F'}
   else buildDef();
+  fixData();
   updDate();rFloors();rTabs();render();
   // Firebase 실시간 동기화 시작
   initFirebase();
