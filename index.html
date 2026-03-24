@@ -359,7 +359,17 @@ function initFirebase(){
     if(isSaving)return;
     const d=snapshot.val();
     if(d&&d.spaces&&d.cats&&d.items){
-      spaces=d.spaces;cats=d.cats;items=d.items;
+      spaces=Array.isArray(d.spaces)?d.spaces:Object.values(d.spaces);
+      cats=d.cats;
+      Object.keys(cats).forEach(k=>{if(!Array.isArray(cats[k]))cats[k]=Object.values(cats[k]||{})});
+      items=Array.isArray(d.items)?d.items:Object.values(d.items);
+      // Firebase는 빈 배열([])을 삭제하므로 복원
+      items.forEach(it=>{
+        if(!it.subs)it.subs=[];
+        if(!Array.isArray(it.subs))it.subs=Object.values(it.subs);
+        if(!it.floors)it.floors={};
+        it.subs.forEach(s=>{if(!s.floors)s.floors={}});
+      });
       asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F';
       save();rFloors();rTabs();render();
     }else if(spaces.length>0&&items.length>0){
