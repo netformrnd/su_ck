@@ -337,6 +337,8 @@ let spaces=[],cats={},items=[],asp='',afl='2F',cf='all',openSubs={};
 let fbApp=null,fbDb=null;
 const DB_ROOT='/supply_checklist';
 let isSaving=false;
+let applyingRemote=false,syncTimer=null;
+function scheduleSync(){clearTimeout(syncTimer);syncTimer=setTimeout(()=>cloudSave(true),600)}
 
 function initFirebase(){
   try{
@@ -359,9 +361,11 @@ function initFirebase(){
     if(isSaving)return;
     const d=snapshot.val();
     if(d&&d.spaces&&d.cats&&d.items){
+      applyingRemote=true;clearTimeout(syncTimer);
       spaces=d.spaces;cats=d.cats;items=d.items;
       asp=d.asp||spaces[0]?.id||'';afl=d.afl||'2F';
       fixData();save();rFloors();rTabs();render();
+      applyingRemote=false;
     }else if(spaces.length>0&&items.length>0){
       // Firebase에 데이터 없으면 현재 로컬 데이터를 업로드
       cloudSave();
@@ -381,13 +385,13 @@ function initFirebase(){
   });
 }
 
-function cloudSave(){
-  if(!fbDb){toast('💾 로컬 저장 완료');return}
+function cloudSave(silent){
+  if(!fbDb){if(!silent)toast('💾 로컬 저장 완료');return}
   isSaving=true;
   const data={spaces,cats,items,asp,afl,updatedAt:new Date().toISOString()};
   fbDb.ref(DB_ROOT).set(data).then(()=>{
     isSaving=false;
-    toast('☁️ 실시간 동기화 완료');
+    if(!silent)toast('☁️ 실시간 동기화 완료');
   }).catch(err=>{
     isSaving=false;
     toast('⚠️ 동기화 오류: '+err.message);
@@ -531,7 +535,7 @@ document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('clic
 
 function exportList(){const sp=spaces.find(x=>x.id===asp);const aN=items.filter(d=>d.space===asp&&(gf(d).need||d.subs.some(s=>gf(s).need)));if(!aN.length){toast('구매 필요 물품 없음');return}let t=`📋 [${afl}] ${sp?sp.name:''} 구매 목록\n${'─'.repeat(24)}\n`;(cats[asp]||[]).forEach(cat=>{const ci=aN.filter(d=>d.cat===cat.id);if(!ci.length)return;t+=`\n${cat.icon} ${cat.title}\n`;ci.forEach(it=>{const f=gf(it);if(f.need)t+=`  ${f.done?'✅':'⬜'} ${it.name} × ${f.qty}개\n`;it.subs.filter(s=>gf(s).need).forEach(s=>{const sf=gf(s);t+=`    ${sf.done?'✅':'⬜'} └ ${s.name} × ${sf.qty}개\n`})})});const tN=aN.reduce((a,i)=>{let c=gf(i).need?1:0;c+=i.subs.filter(s=>gf(s).need).length;return a+c},0);const tP=aN.reduce((a,i)=>{let c=(gf(i).need&&!gf(i).done)?1:0;c+=i.subs.filter(s=>gf(s).need&&!gf(s).done).length;return a+c},0);t+=`\n${'─'.repeat(24)}\n총 ${tN}건 | 미완료 ${tP}건`;navigator.clipboard.writeText(t).then(()=>toast('📋 복사됨')).catch(()=>toast('복사 실패'))}
 
-function save(){localStorage.setItem('cl_v7',JSON.stringify({spaces,cats,items,asp,afl}))}
+function save(){localStorage.setItem('cl_v7',JSON.stringify({spaces,cats,items,asp,afl}));if(!applyingRemote)scheduleSync()}
 function manualSave(){
   save();
   const btn=document.getElementById('fabSave');
